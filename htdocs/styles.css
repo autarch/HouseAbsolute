@@ -16,7 +16,7 @@ a {
 	font-size: 13px;
 	font-weight: normal;
 	line-height:20px;
-	text-decoration: none; }
+	text-decoration: underline; }
 
 a:link { color: #669999; background-color:transparent;}
 a:visited { color: #669999; background-color:transparent;}
