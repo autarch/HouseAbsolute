@@ -57,9 +57,10 @@
 
      <p class="v12">
      For data-dependent applications, nothing is more important than
-     database design.  If your schema does not really reflect your
-     business model, then all applications using that schema will be
-     forever crippled.  I can help you get it right the first time.
+     database design.  If your database design does not really reflect
+     your business model, then all applications using that database
+     will be forever crippled.  I can help you get it right the first
+     time.
      </p>
     </li>
 
