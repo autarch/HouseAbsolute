@@ -69,15 +69,15 @@
 </html>
 
 <%def .menu>
-<a href="/index.mhtml" class="nav">&nbsp;&nbsp;home&nbsp;&nbsp;</a>\
-<a href="/resume.mhtml" class="nav">&nbsp;&nbsp;resume&nbsp;&nbsp;</a>\
-<a href="/clients.mhtml" class="nav">&nbsp;&nbsp;clients&nbsp;&nbsp;</a>\
-<a href="/contact.mhtml" class="nav">&nbsp;&nbsp;contact&nbsp;&nbsp;</a>\
+<a href="/index.html" class="nav">&nbsp;&nbsp;home&nbsp;&nbsp;</a>\
+<a href="/resume.html" class="nav">&nbsp;&nbsp;resume&nbsp;&nbsp;</a>\
+<a href="/clients.html" class="nav">&nbsp;&nbsp;clients&nbsp;&nbsp;</a>\
+<a href="/contact.html" class="nav">&nbsp;&nbsp;contact&nbsp;&nbsp;</a>\
 &nbsp;&nbsp;&nbsp;\
 <%filter>
 my $uri = $r->uri;
 
-$uri = '/index.mhtml' if $uri eq '/';
+$uri = '/index.html' if $uri eq '/';
 
 s/href="$uri" class="nav"/href="$uri" class="navOn"/;
 </%filter>
