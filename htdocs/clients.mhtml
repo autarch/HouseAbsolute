@@ -47,6 +47,43 @@ My clients, listed in rough chronological order, have included:
 
  </ul>
 
+<h1 class="pad8">Other Work</h2>
+
+<p class="v12">
+These are some volunteer projects I've worked on which can be seen
+online.
+</p>
+
+ <ul>
+  <li>
+   <p class="v12">
+   <a href="http://www.hkmdb.com/db/search/">Hong Kong Movie
+   Database</a> - Design and development of a dynamic, searchable,
+   multi-lingual movie database.  Developed with Eric Schneider and
+   Ryan Law.
+   </p>
+  </li>
+
+  <li>
+   <p class="v12">
+   <a href="http://jobs.perl.org/">Perl Jobs</a> - A site where
+   employers can post jobs and users can browse them.  Developed with
+   Ask Bj&oslash;rn Hansen.
+   </p>
+  </li>
+
+  <li>
+   <p class="v12">
+   <a href="http://apprentice.perl.org/">Perl Apprenticeship Site</a>
+   - A site for people to post projects that need apprentices or
+   mentors.
+   </p>
+  </li>
+
+ </ul>
+
+<h1 class="pad8">References</h2>
+
 <p class="v12">
 References are available upon request.
 </p>
