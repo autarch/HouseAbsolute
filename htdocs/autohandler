@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+ <meta name="keywords" content="<& .keywords &>">
+ <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+ <title>House Absolute Consulting</title>
+ <link rel="Stylesheet" href="styles.css" type="text/css" media="screen">
+ <link rel="Stylesheet" href="styles.css" type="text/css" media="print">
+</head>
+<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" style="background-image:url(/i/bg.gif); background-repeat:repeat-y">
+
+<table valign="top" border="0" cellpadding="0" cellspacing="0" width="100%">
+ <tr>
+  <td valign="top" bgcolor="#99cc99" width="99" height="29"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" colspan="5" bgcolor="#ffffff" width="100%" height="29"><img src="/i/sky.gif" width="596" height="29" border="0" alt=""></td>
+  </tr>
+ <tr>
+  <td valign="top" colspan="6" bgcolor="#99cc99" width="100%" height="1"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+ </tr>
+ <tr>
+  <td valign="top" width="99" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" colspan="3" bgcolor="#ffffff" width="90%" height="20" align="right"><& .menu &></td>
+  <td valign="top" bgcolor="#99cc99" width="1" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="8%" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+ </tr>
+
+ <tr>
+  <td valign="top" width="99" height="123"><img src="/i/logo.gif" width="99" height="123" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="6%" height="123"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" width="62%" height="123"><img src="/i/header.gif" width="446" height="123" border="0" alt="House Absolute Consulting"></td>
+  <td valign="top" bgcolor="#ffffff" width="24%" height="123"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#99cc99" width="1" height="123"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="8%" height="123"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+ </tr>
+ <tr>
+  <td valign="top" width="99"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="6%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="62%">
+
+% $m->call_next;
+
+</td>
+  <td valign="top" bgcolor="#ffffff" width="24%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#99cc99" width="1"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="8%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+ </tr>
+ <tr>
+  <td valign="top" width="99" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" colspan="3" bgcolor="#ffffff" width="90%" height="20" align="right"><a href="#" class="navOn">&nbsp;&nbsp;home&nbsp;&nbsp;</a><a href="#" class="nav">&nbsp;&nbsp;resume&nbsp;&nbsp;</a><a href="#" class="nav">&nbsp;&nbsp;clients&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;</td>
+  <td valign="top" bgcolor="#99cc99" width="1" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="8%" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+ </tr>
+ <tr>
+  <td valign="top" width="99"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" colspan="5" bgcolor="#99cc99" width="100%" height="1"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+ </tr>
+ <tr>
+  <td valign="top" width="99"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="6%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="62%"><h2>Copyright &copy; 2002 House Absolute Consuting</p></td>
+  <td valign="top" bgcolor="#ffffff" width="24%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="1"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+  <td valign="top" bgcolor="#ffffff" width="8%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
+ </tr>
+</table>
+
+</body>
+</html>
+
+<%def .menu>
+<a href="/index.mhtml" class="nav">&nbsp;&nbsp;home&nbsp;&nbsp;</a>\
+<a href="/resume.mhtml" class="nav">&nbsp;&nbsp;resume&nbsp;&nbsp;</a>\
+<a href="/clients.mhtml" class="nav">&nbsp;&nbsp;clients&nbsp;&nbsp;</a>\
+<a href="/contact.mhtml" class="nav">&nbsp;&nbsp;contact&nbsp;&nbsp;</a>\
+&nbsp;&nbsp;&nbsp;\
+<%filter>
+my $uri = $r->uri;
+
+$uri = '/index.mhtml' if $uri eq '/';
+
+s/href="$uri" class="nav"/href="$uri" class="navOn"/;
+</%filter>
+</%def>
+
+<%def .keywords>\
+<% $words | h %>\
+<%init>
+# yeesh, looks like a big free association
+my $words =
+    join ', ',
+    ( 'dave',
+      'rolsky',
+      'dave rolsky',
+      'david',
+      'david rolsky',
+      'perl',
+      'mason',
+      'HTML::Mason',
+      'alzabo',
+      'cgi',
+      'script',
+      'mod_perl',
+      'apache',
+      'web',
+      'web application',
+      'application',
+      'programming',
+      'programmer',
+      'analyst',
+      'consulting',
+      'consultant',
+      'database',
+      'database design',
+      'network',
+      'distributed',
+      'mysql',
+      'postgres',
+      'oracle',
+      'sybase',
+      'software',
+      'software development',
+      'software engineer',
+      'software engineering',
+      'object-oriented',
+      'computer programmer',
+      'perl developer',
+      'perl programmer',
+      'application development',
+      'enterprise',
+      'long-term planning',
+      'enterprise-class',
+      'enterprise class',
+      'requirements',
+      'research',
+      'requirements analysis',
+      'software design',
+      'software specification',
+      'software architecture',
+      'code',
+      'coding',
+      'team leader',
+      'object modeling',
+      'database modeling',
+      'object design',
+      'css',
+      'xml',
+      'dbi',
+      'sourceforge',
+      'linux',
+      'unix',
+      'gnu/linux',
+      'log::dispatch',
+      'params::validate',
+      'exception::class',
+    );
+</%init>
+</%def>

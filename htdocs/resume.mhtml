@@ -1,0 +1,655 @@
+<h1 class="pad8">David Rolsky</h1>
+
+<h2 class="pad8">Summary</h2>
+
+<p class="v12">
+Four years of professional software development experience,
+specializing in Perl, Mason, web applications, and database design,
+including:
+</p>
+
+<ul>
+ <li>
+  <p class="v12">
+  Design and development of a number of large web applications,
+  including an online contact management system and a port of
+  O'Reilly's WebBoard product to a *nix/Perl platform.
+  </p>
+ </li>
+
+ <li>
+  <p class="v12">
+  A member of the core development team for <a
+  href="http://www.masonhq.com">Mason</a>, a very widely used Perl
+  templating system.
+  </p>
+ </li>
+
+ <li>
+  <p class="v12">
+  Co-author of <a href="http://www.masonbook.com">Embedding Perl in
+  HTML with Mason</a>, published by O'Reilly.
+  </p>
+ </li>
+
+ <li>
+  <p class="v12">
+  Development of a data modeling tool called <a
+  href="http://www.alzabo.org/">Alzabo</a>.
+  </p>
+ </li>
+</ul>
+
+<h2 class="pad8">Skills</h2>
+
+<table width="100%" cellspacing="0" cellpadding="5">
+ <tr valign="top">
+  <td>
+   Languages and related technologies
+  </td>
+  <td>
+   <b>Perl</b>,
+   <b>mod_perl</b>,
+   <b>Mason</b>,
+   <b>SQL</b>,
+   <b>HTML</b>,
+   XML,
+   PHP,
+   C,
+   JavaScript,
+   SWIG
+  </td>
+ </tr>
+ <tr valign="top">
+  <td>
+   Servers and tools
+  </td>
+  <td>
+   <b>Apache (1 & 2)</b>, mod_ssl,
+   Sendmail, Exim, Qmail,
+   RT, Mailman, Bind, SSH,
+   <b>CVS</b>,
+   <b>Subversion</b>
+ </tr>
+ <tr valign="top">
+  <td>
+   DBMSs
+  </td>
+  <td>
+   <b>MySQL</b>,
+   <b>Postgres</b>,
+   Oracle, Sybase
+  </td>
+ </tr>
+ <tr valign="top">
+  <td>
+   Operating systems
+  </td>
+  <td>
+   Unix, including <B>GNU/Linux</B>, BSD, and Solaris
+  </td>
+ </tr>
+ <tr valign="top">
+  <td>
+   Other skills
+  </td>
+  <td>
+   <b>Object oriented analysis, design, and programming</b><br>
+   <b>Data modeling</b><br>
+   <b>Designing applications for re-usability and maintainability</b><br>
+   <b>Web application design</b><br>
+   <b>Web authentication and authorization</b><br>
+   <b>Network applications and daemons</b>
+  </td>
+ </tr>
+</table>
+
+<br>
+<br>
+
+<h2 class="pad8">Experience</h2>
+
+<table width="100%">
+
+ <tr>
+  <td>
+   <b>Self-Employed Consultant, 2/2002 - present</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   During this time, I worked on two separate projects.  The first,
+   for <a href="http://www.stemsystems.com/">Stem Systems</a>,
+   involved the creation of a web crawling application operating across
+   multiple machines.  This is implemented using Stem, a
+   message-passing system for communication across a network.  Some of
+   the work I did included implementing the fulltext indexing and
+   searching daemons for the system, wrapping a C library for fulltext
+   indexing using SWIG, creating administration scripts, and writing
+   system documentation.
+   </p>
+
+   <p class="v12">
+   The second project, for <a
+   href="http://www.marigoldtech.com/">Marigold Technologies</a>, was
+   to review and redesign their <a
+   href="http://www.contactbook.net/">ContactBook</a> product.  I
+   added support for handling incoming email, user-defined custom
+   fields, and a number of other new or enhanced features, as well as
+   re-architecting the existing code base in order to make it more
+   maintainable and scalable.
+   </p>
+  </td>
+ </tr>
+
+ <tr valign="top">
+  <td>   &nbsp;
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>DoTheGood - Minneapolis, Minnesota</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <b>Lead Developer, 4/15/2001 - 1/22/2002</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   As lead developer, I was responsible for the design and development
+   of an online system into which non-profit organizations were able
+   to enter data about themselves.  This data was browsable by
+   potential donors, who could donate directly to the non-profits via
+   a shopping cart.
+   </p>
+
+   <p class="v12">
+   Clients were provided co-branded access to the system, and had an
+   administrative interface from which they could view statistics, filter
+   non-profits shown on their version of the site, and select featured
+   projects for their site.
+   </p>
+
+   <p class="v12">
+   In addition, I also created a development environment which allowed
+   both the designers (using Macintoshes) and developers (using either
+   Windows or GNU/Linux) to share a CVS repository and to run their
+   own copy of the site.
+   </p>
+
+   <p class="v12">
+   The site uses Mason, MySQL, and some PHP.  In addition, my data
+   modeling tool Alzabo has been used in the development of the
+   schema for the application, as well as for communicating with the
+   database.
+   </p>
+  </td>
+ </tr>
+
+ <tr valign="top">
+  <td>
+   &nbsp;
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>O'Reilly and Associates, Software division, Sebastopol, California</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <b>Consultant, 7/24/2000 - 2/23/2001</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   I was involved in the design and implementation of a Unix version
+   of O'Reilly's WebBoard, which at the time was solely a
+   Windows-based product.  This was not a port in a strict sense, as
+   the "ported" version was in Perl, while the original was in Visual
+   Basic.  In addition, many new features were added to this version
+   which were never present in the Windows version.
+   </p>
+
+   <p class="v12">
+   The ported application used Apache and mod_perl as its platform,
+   along with a database back end capable of using any of four
+   databases, MySQL, Postgres, Sybase, or Oracle, as a back end.
+   </p>
+
+   <p class="v12">
+   There were a number of challenges while working on this
+   application, including creating an installer that would seamlessly
+   use an existing Apache and mod_perl installation, or create a new
+   one.  The installer also had to handle installing the software on
+   the file system and in the chosen database.  I also worked on the
+   database communication layer in order to minimize duplicated code,
+   taking the original Sybase code and reworking it to support all
+   four platforms.  This product also supported multiple
+   authentication models, a very full featured and customizable
+   interface, and a powerful web interface for administration.
+   </p>
+  </td>
+ </tr>
+
+ <tr valign="top">
+  <td>
+   &nbsp;
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>Bluewater Technology, Minnetonka, Minnesota</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <b>Consultant, 3/21/2000 - 5/19/2000 </b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   As part of a three person team, I rewrote a highly dynamic web site
+   from scratch.  This included redesigning the database and rewriting
+   the code to run under mod_perl.  The final result was much faster,
+   more maintainable and more extendable.  It also allowed for greater
+   depth of reporting as the new design was capable of storing more
+   information on site traffic and how the site was used.
+   </p>
+  </td>
+ </tr>
+
+ <tr valign="top">
+  <td>
+   &nbsp;
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>Digital River, Eden Prairie, Minnesota</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <b>Software Engineer, Remote Commerce Server Team, 12/1998 - 1/2000</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   As a developer at Digital River, I was involved in a number of
+   different projects, including the development of a simple web-based
+   call tracking system for Customer Service, programs for exchanging
+   data between Digital River and its clients, and web-based programs
+   to interface in real time with clients and partners.
+   </p>
+
+   <p class="v12">
+   From June of 2000 onwards, I was responsible for the maintenance
+   and refinement of all shared Perl code used by my team.  In
+   addition, I was the primary interface with other development teams,
+   architecture of all new projects, code reviews of other
+   programmers, and mentoring other programmers.
+   </p>
+
+  </td>
+ </tr>
+
+ <tr valign="top">
+  <td>
+   &nbsp;
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>Minnesota Life, St. Paul, Minnesota</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <b>Network Services Analyst, Technical Support Analyst, 8/1997 - 11/1998</b>
+  </td>
+ </tr>
+
+ <tr valign="top">
+  <td>
+   &nbsp;
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>University of Minnesota School of Music</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <b>Music Theory and Ear Training Teaching Assistant, 9/1995 - 6/1997</b>
+  </td>
+ </tr>
+</table>
+
+<br>
+<br>
+
+<h2 class="pad8">Publications & Presentations</h2>
+
+<table width="100%">
+ <tr>
+  <td>
+   <b><i>Embedding Perl in HTML with Mason</i></b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <table width="100%">
+    <tr valign="top">
+     <td>
+      <img src="http://masonbook.com/i/cover_small.jpg" width="110" height="141">
+     </td>
+     <td>
+      <p class="v12">
+      This book, which I co-authored with Ken Williams, is available
+      from <a
+      href="http://www.oreilly.com/catalog/perlhtmlmason/">O'Reilly and
+      Associates</a>, and was published in October of 2002.
+      </p>
+     </td>
+    </tr>
+   </table>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>Programming with Mason</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   <a href="http://www.perl.com/pub/a/2002/12/11/mason.html">This
+   article</a> is a modified version of one of the book's chapters,
+   published on O'Reilly's perl.com site.
+   </p>
+  </td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>Taipei Perl Monger, Taipei, Taiwan, 2002</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   <i>Introduction to Mason</i><br>
+   <i>Introduction to Alzabo</i>
+   </p>
+  </td>
+ <tr>
+
+ <tr>
+  <td>
+   <b>Yet Another Perl Conference, St. Louis, MO, 2002</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   <i>Introduction to Mason</i> (90 minutes), co-presented with Brent
+   Michalski.<br>
+   <i>Introduction to Alzabo</i> (45 minutes)
+   </p>
+  </td>
+ <tr>
+
+ <tr>
+  <td>
+   <b>O'Reilly Open Source Convention, San Diego, CA, 2001</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   <i>Introduction to Mason</i> (3 hour tutorial), co-presented with Brent
+   Michalski.<br>
+   <i>Introduction to Alzabo</i> (45 minutes)
+   </p>
+  </td>
+ <tr>
+
+</table>
+
+<br>
+<br>
+
+<h2 class="pad8">Free Software</h2>
+
+<p class="v12">
+Besides contributing patches to numerous projects, I have created
+a number of Free Software tools.
+</p>
+
+<table width="100%">
+ <tr>
+  <td>
+   <b>Alzabo</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   <a href="http://www.alzabo.org/">Alzabo</a> is an open source data
+   modeling and RDBMS-OO mapping tool written entirely in Perl.  It is
+   designed to facilitate the design and maintenance of database
+   driver systems, allowing the programmer to concentrate more on the
+   data modeling and application logic by taking care of all database
+   accesses.
+   </p>
+
+   <p class="v12">
+   Features include:
+
+   <ul>
+    <li>Generating SQL to create a new database
+    <li>Generating SQL 'diffs' to change an existing database to
+    match changes in the data model
+    <li>Reverse engineering an existing database into a data model
+    <li>Complete abstraction of most SQL operations.
+    <li>Caching and syncing of data pulled from the database across
+    multiple processes.
+    <li>The ability to maintain referential integrity.
+   </ul>
+   </p>
+
+   <p class="v12">
+   Alzabo has many other features.  Currently, it supports MySQL
+   and Postgres.  This will be expanded in the future as time and
+   resources allow.
+   </p>
+  </td>
+ </tr>
+ <tr valign="top">
+  <td>
+   <b>Mason</b>
+  </td>
+ </tr>
+ <tr valign="top">
+  <td>
+   <p class="v12">
+   Since the summer of 2000, I have been a member of the core team for
+   the <a href="http://www.masonhq.com/">Mason</a> templating system.
+   I led the development effort for the 1.10 release of Mason, which
+   involved rewriting and rearchitecting major portions of the Mason
+   code base, in order to make it more easily extendable.
+   </p>
+  </td>
+ </tr>
+
+ <tr valign="top">
+  <td>
+   <b>Perl Modules</b>
+  </td>
+ </tr>
+ <tr valign="top">
+  <td>
+   <ul>
+    <li>
+     <p class="v12">
+     <a
+     href="http://search.cpan.org/search?dist=Log-Dispatch">Log::Dispatch</a>.
+     is a suite of object-oriented Perl modules for logging a message
+     to multiple outputs.  It is being used in a number of other
+     modules, including Log4Perl and Log::Dispatch::Config, and is
+     widely used in application development in the Perl community.
+     </p>
+    </li>
+
+    <li>
+     <p class="v12">
+     <a
+     href="http://search.cpan.org/search?dist=Exception-Class">Exception::Class</a>
+     allows Perl programmers to declare hierarchical sets of exception
+     classes for their own use.  It provides a complete exception
+     object implementation though programmers are also free to use
+     their own if they prefer to do so.
+     </p>
+    </li>
+
+    <li>
+     <p class="v12">
+     <a
+     href="http://search.cpan.org/search?dist=Params-Validate">Params::Validate</a>
+     provides method/function argument validation.  It allows
+     verification based on primitive types, object class, object
+     interface, and callbacks.  At a simpler level, it can be used to
+     verify that required parameters are present and that no
+     superfluous ones have been given.
+     </p>
+    </li>
+
+    <li>
+     <p class="v12">
+     <a href="http://search.cpan.org/author/DROLSKY/">Others</a>
+     including Devel::StackTrace,
+     MasonX::Request::WithApacheSession, Lingua::ZH::CCDICT,
+     Sig::PackageScoped, Thesaurus, and Time::Piece::MySQL.
+     </p>
+    </li>
+   </ul>
+  </td>
+ </tr>
+</table>
+
+<br>
+<br>
+
+<h2 class="pad8">Other Work</h2>
+
+<p class="v12">
+These are some of the community projects I have worked on.
+</p>
+
+<table width="100%">
+ <tr>
+  <td>
+   <b>Hong Kong Movie Database</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   The <a href="http://db.hkmdb.com/">Hong Kong movie database</a> is
+   implemented using Mason and mod_perl with a MySQL database back end.
+   The system includes an advanced search engine, user authentication
+   for multiple levels of editing access, and a full web based data
+   editing system.  I am responsible for the bulk of the design
+   decisions in this project as well as for much of the database
+   design, the search engine, and much of the shared back end code
+   used by the user interface.
+   </p>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <b>jobs.perl.org</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   I collaborated with Ask Bj&oslash;rn Hansen on the design and
+   development of <a href="http://jobs.perl.org">the Perl jobs
+   site</a>, which is a resource for Perl programmers and employers
+   looking to hire them.  The site uses Mason and MySQL.
+   </p>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <b>apprentice.perl.org</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   <p class="v12">
+   The <a href="http://apprentice.perl.org">Perl Apprenticeship
+   site</a> was developed as part of the writing of the Mason book, as
+   an example site using Mason.  The majority of the development of
+   this site was done by myself, with help from my co-author, Ken
+   Williams.  I continue to maintain the site now that it has a life
+   independent from the book.
+   </p>
+  </td>
+ </tr>
+</table>
+
+<br>
+<br>
+
+<h2 class="pad8">Education</h2>
+
+<table width="100%">
+ <tr>
+  <td>
+   <b>University of Minnesota, 1995 -1997</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   School of Music
+  </td>
+ </tr>
+ <tr>
+  <td>
+   Master of Arts in Music Composition
+  </td>
+ </tr>
+
+ <tr>
+  <td>&nbsp;</td>
+ </tr>
+
+ <tr>
+  <td>
+   <b>Bard College, 1991 - 1995</b>
+  </td>
+ </tr>
+ <tr>
+  <td>
+   Bachelor of Arts in Music
+  </td>
+ </tr>
+</table>
