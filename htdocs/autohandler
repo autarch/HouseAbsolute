@@ -88,7 +88,7 @@ s/href="$uri" class="nav"/href="$uri" class="navOn"/;
 <%init>
 # yeesh, looks like a big free association
 my $words =
-    join ', ',
+    join ", \n",
     ( 'dave',
       'rolsky',
       'dave rolsky',
