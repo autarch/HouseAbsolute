@@ -88,7 +88,7 @@ s/href="$uri" class="nav"/href="$uri" class="navOn"/;
 <%init>
 # yeesh, looks like a big free association
 my $words =
-    join ", \n",
+    join ",",
     ( 'dave',
       'rolsky',
       'dave rolsky',
@@ -154,9 +154,13 @@ my $words =
       'linux',
       'unix',
       'gnu/linux',
-      'log::dispatch',
-      'params::validate',
-      'exception::class',
+      'Log::Dispatch',
+      'Params::Validate',
+      'Exception::Class',
+      'DateTime',
+      'date',
+      'time',
+      'DateTime::Timezone',
     );
 </%init>
 </%def>
