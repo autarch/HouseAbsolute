@@ -2,165 +2,50 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
- <meta name="keywords" content="<& .keywords &>">
- <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+ <meta http-equiv="content-type" content="text/html; charset=UTF-8">
  <title>House Absolute Consulting</title>
- <link rel="Stylesheet" href="styles.css" type="text/css" media="screen">
- <link rel="Stylesheet" href="styles.css" type="text/css" media="print">
+ <link rel="Stylesheet" href="/houseabsolute.css" type="text/css" media="screen">
+ <link rel="Stylesheet" href="/houseabsolute.css" type="text/css" media="print">
 </head>
-<body bgcolor="#ffffff" leftmargin="0" topmargin="0" marginheight="0" marginwidth="0" style="background-image:url(/i/bg.gif); background-repeat:repeat-y">
 
-<table valign="top" border="0" cellpadding="0" cellspacing="0" width="100%">
- <tr>
-  <td valign="top" bgcolor="#99cc99" width="99" height="29"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" colspan="5" bgcolor="#ffffff" width="100%" height="29"><img src="/i/sky.gif" width="596" height="29" border="0" alt=""></td>
-  </tr>
- <tr>
-  <td valign="top" colspan="6" bgcolor="#99cc99" width="100%" height="1"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
- </tr>
- <tr>
-  <td valign="top" width="99" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" colspan="3" bgcolor="#ffffff" width="90%" height="20" align="right"><& .menu &></td>
-  <td valign="top" bgcolor="#99cc99" width="1" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="8%" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
- </tr>
+<body>
 
- <tr>
-  <td valign="top" width="99" height="123"><img src="/i/logo.gif" width="99" height="123" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="6%" height="123"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" width="62%" height="123"><img src="/i/header.gif" width="446" height="123" border="0" alt="House Absolute Consulting"></td>
-  <td valign="top" bgcolor="#ffffff" width="24%" height="123"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#99cc99" width="1" height="123"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="8%" height="123"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
- </tr>
- <tr>
-  <td valign="top" width="99"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="6%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="62%">
+<div id="top-image">
+ <img src="/i/sky.gif" width="596" height="29" alt="sky background" />
+</div>
 
-% $m->call_next;
+<& .menu &>
 
-</td>
-  <td valign="top" bgcolor="#ffffff" width="24%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#99cc99" width="1"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="8%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
- </tr>
- <tr>
-  <td valign="top" width="99" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" colspan="3" bgcolor="#ffffff" width="90%" height="20" align="right"><& .menu &></td>
-  <td valign="top" bgcolor="#99cc99" width="1" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="8%" height="20"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
- </tr>
- <tr>
-  <td valign="top" width="99"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" colspan="5" bgcolor="#99cc99" width="100%" height="1"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
- </tr>
- <tr>
-  <td valign="top" width="99"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="6%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="62%"><h2>Copyright &copy; 2002 - <% (localtime)[5] + 1900 %> House Absolute Consulting</p></td>
-  <td valign="top" bgcolor="#ffffff" width="24%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="1"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
-  <td valign="top" bgcolor="#ffffff" width="8%"><img src="/i/spacer.gif" width="1" height="1" border="0" alt=""></td>
- </tr>
-</table>
+<div id="hac-logo">
+ <img src="/i/logo.gif" alt="House Absolute Consulting logo" />
+</div>
+
+<div id="content">
+% $m->call_next();
+
+ <div id="footer">
+ Copyright &copy; 2002 - <% (localtime)[5] + 1900 %> David Rolsky
+ </div>
+
+</div>
 
 </body>
 </html>
 
 <%def .menu>
-<a href="/index.html" class="nav">&nbsp;&nbsp;home&nbsp;&nbsp;</a>\
-<a href="/resume.html" class="nav">&nbsp;&nbsp;resume&nbsp;&nbsp;</a>\
-<a href="/clients.html" class="nav">&nbsp;&nbsp;clients&nbsp;&nbsp;</a>\
-<a href="/contact.html" class="nav">&nbsp;&nbsp;contact&nbsp;&nbsp;</a>\
-&nbsp;&nbsp;&nbsp;\
+<div class="menu">
+ <ul>
+  <li><a href="/index.html">home</a></li>\
+<li><a href="/resume.html">resume</a></li>\
+<li><a href="/contact.html">contact</a></li>
+ </ul>
+</div>
+
 <%filter>
 my $uri = $r->uri;
 
 $uri = '/index.html' if $uri eq '/';
 
-s/href="$uri" class="nav"/href="$uri" class="navOn"/;
+s/href="\Q$uri\E"/href="$uri" class="selected"/;
 </%filter>
-</%def>
-
-<%def .keywords>\
-<% $words | h %>\
-<%init>
-# yeesh, looks like a big free association
-my $words =
-    join ",",
-    ( 'dave',
-      'rolsky',
-      'dave rolsky',
-      'david',
-      'david rolsky',
-      'perl',
-      'mason',
-      'HTML::Mason',
-      'alzabo',
-      'cgi',
-      'script',
-      'mod_perl',
-      'apache',
-      'web',
-      'web application',
-      'application',
-      'programming',
-      'programmer',
-      'analyst',
-      'consulting',
-      'consultant',
-      'database',
-      'database design',
-      'network',
-      'distributed',
-      'mysql',
-      'postgres',
-      'oracle',
-      'sybase',
-      'software',
-      'software development',
-      'software engineer',
-      'software engineering',
-      'object-oriented',
-      'computer programmer',
-      'perl developer',
-      'perl programmer',
-      'application development',
-      'enterprise',
-      'long-term planning',
-      'enterprise-class',
-      'enterprise class',
-      'requirements',
-      'research',
-      'requirements analysis',
-      'software design',
-      'software specification',
-      'software architecture',
-      'code',
-      'coding',
-      'team leader',
-      'object modeling',
-      'database modeling',
-      'object design',
-      'object-oriented',
-      'object-oriented analysis',
-      'object-oriented design',
-      'object-oriented programming',
-      'css',
-      'xml',
-      'dbi',
-      'sourceforge',
-      'linux',
-      'unix',
-      'gnu/linux',
-      'Log::Dispatch',
-      'Params::Validate',
-      'Exception::Class',
-      'DateTime',
-      'date',
-      'time',
-      'DateTime::Timezone',
-    );
-</%init>
 </%def>
