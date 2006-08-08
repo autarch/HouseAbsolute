@@ -10,7 +10,7 @@ body {
   color: #333;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h2, h3, h4 {
   color: #669999;
 }
 
@@ -127,8 +127,19 @@ div.publication img {
   border: 0;
 }
 
-#presentations h4 {
+#presentations h3 {
+  font-size: 100%;
+  color: black;
+
   margin: 0.2em 0 0 0;
+}
+
+div.education h3 {
+  margin-bottom: 0.2em;
+}
+
+div.education span.degree {
+  font-weight: bold;
 }
 
 /* Clients page */
