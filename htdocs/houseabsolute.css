@@ -10,8 +10,12 @@ body {
   color: #333;
 }
 
-h2, h3, h4 {
+h2 {
   color: #669999;
+}
+
+h3 {
+  color: black;
 }
 
 a { 
