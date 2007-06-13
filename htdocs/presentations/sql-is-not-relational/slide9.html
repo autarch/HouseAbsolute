@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>The Relational Model: Integrity - Attribute and Type</title>
+<title>Why SQL is not relational: Poor Data Type Support</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
@@ -123,7 +123,7 @@ function nextSlide() {
 }
 
 function prevSlide() {
-    window.location = 'slide8b.html#end';
+    window.location = 'slide8.html';
 }
 
 function indexSlide() {
@@ -174,7 +174,7 @@ document.onkeypress = handleKey
  <table width='100%'>
   <tr>
    <td width="13%">
-    Relational &amp; SQL
+
    </td>
    <td align="center" width="73%">
     <a accesskey="s" href="index.html">What is a Data Model?; The Relational Model; SQL is not Relational</a>
@@ -191,20 +191,13 @@ document.onkeypress = handleKey
 <div id="content"><p />
  <div class="top_spacer"></div>
  
- <h3>The Relational Model: Integrity - Attribute and Type</h3>
+ <h3>Why SQL is not relational: Poor Data Type Support</h3>
 <ul>
-<li>Integrity is provided through constraints</li>
-<li>We already saw attribute constraints</li>
+<li>SQL implementations have poor support for custom data types</li>
 
 <ul>
-<li>Each attribute has a type</li>
-</ul>
-<li>Types are constraints</li>
-
-<ul>
-<li>Part numbers must be positive integers</li>
-<li>Part names must be names - strings with a length &gt;= 2</li>
-<li>Colors must be one of: red, green, blue, yellow</li>
+<li>Creating new data types based on &#34;base types&#34; should be trivial</li>
+<li>Creating new complex data types &#40;map route, fingerprint&#41; should be possible</li>
 </ul></ul>
 
 
@@ -218,14 +211,14 @@ document.onkeypress = handleKey
    <td align="left" valign="middle">
     <div>
 
-     <a accesskey='p' href="slide8b.html#end">&lt; &lt; Previous</a> |
+     <a accesskey='p' href="slide8.html">&lt; &lt; Previous</a> |
      <a accesskey='i' href="index.html">Index</a> |
      <a accesskey='n' href="slide10.html">Next &gt;&gt;</a>
 
     </div>
    </td>
    <td align="right" valign="middle">
-    Copyright &copy; 2005 David Rolsky
+    Copyright &copy; 2005-2006 David Rolsky
    </td>
   </tr>
  </table>
