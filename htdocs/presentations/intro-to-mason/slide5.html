@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>autohandlers (cont)</title>
+<title>Component Calls</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
@@ -52,7 +52,7 @@ small {
 }
 
 #topbar {
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position:absolute;
     right: 5px;
@@ -61,8 +61,7 @@ small {
 }
 
 #bottombar {
-    display: none;
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position: fixed;
     right: 5px;
@@ -90,6 +89,11 @@ small {
     margin-top: 80px;
 }
 
+pre {
+    background-color: #EEE;
+    padding: 0.5em;
+    width: 80%;
+}
 
 #logo {
     position: fixed;
@@ -101,14 +105,6 @@ small {
     background-image: url(/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png);
     background-repeat: no-repeat;
 }
-
-.formatter_pre, pre {
-    background: lightgray;
-    border: 1px black solid;
-    padding: 5px;
-    font-size: 120%;
-    width: 700px;
-}
 /* END index.css */
 
 
@@ -116,11 +112,11 @@ small {
 <script type="text/javascript">
 // BEGIN controls.js
 function nextSlide() {
-    window.location = 'slide6.html';
+    window.location = 'slide6a.html';
 }
 
 function prevSlide() {
-    window.location = 'slide4b.html#end';
+    window.location = 'slide4.html';
 }
 
 function indexSlide() {
@@ -170,9 +166,7 @@ document.onkeypress = handleKey
 <div id="topbar">
  <table width='100%'>
   <tr>
-   <td width="13%">
-    <img src="/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png" alt="Mason" />
-   </td>
+   <td width="13%"></td>
    <td align="center" width="73%">
     <a accesskey="s" href="index.html">Introduction to Mason</a>
    </td>
@@ -187,60 +181,29 @@ document.onkeypress = handleKey
 <!-- BEGIN slide -->
 <div id="content"><p />
  <div class="top_spacer"></div>
- <img name="img" id="img" width="250" src="images/pg02-car.gif" align=right>
+ <img name="img" id="img" width="250" src="images/telephone.jpg" align=right>
  <p>
 
 
 </p>
-<h2>autohandlers (cont)</h2>
+<h2>Component Calls</h2>
 <ul>
-<li>Our <u>/autohandler</u> file might look a bit like this:</li>
+<li>Components can call other components</li>
+<li>For example:</li>
 </ul>
 
 <pre>
-&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;My Totally Wicked Site, Dude!&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-<span class="hilite_blue">% $m-&gt;call_next;</span>
-
-&lt;/body&gt;
-&lt;/html&gt;
+<span class="hilite_blue">&lt;&amp; header &amp;&gt;</span>
+Some text here.
+<span class="hilite_blue">&lt;&amp; footer, size =&gt; 2, links =&gt; \@links &amp;&gt;</span>
 </pre>
+
+<ul>
+<li>Component calls are like function calls, and can take arguments.</li>
+</ul>
 
 
 </div>
 <!-- END slide.html -->
 <!-- END slide -->
-<!-- BEGIN bottom.html -->
-<div id="bottombar">
- <table width="100%">
-  <tr>
-   <td align="left" valign="middle">
-    <div>
-
-     <a accesskey='p' href="slide4b.html#end">&lt; &lt; Previous</a> |
-     <a accesskey='i' href="index.html">Index</a> |
-     <a accesskey='n' href="slide6.html">Next &gt;&gt;</a>
-
-    </div>
-   </td>
-   <td align="right" valign="middle">
-    Copyright &copy; 2005-2006 David Rolsky
-   </td>
-  </tr>
- </table>
-</div>
-<div id="logo"></div>
-
-<div id="spacer">
- <a name="end"></a>
-</div>
-</body>
-</html>
-<!-- END bottom.html -->
-
-
 

@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Configuration under mod_perl</title>
+<title>Other globals</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
@@ -52,7 +52,7 @@ small {
 }
 
 #topbar {
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position:absolute;
     right: 5px;
@@ -61,8 +61,7 @@ small {
 }
 
 #bottombar {
-    display: none;
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position: fixed;
     right: 5px;
@@ -90,6 +89,11 @@ small {
     margin-top: 80px;
 }
 
+pre {
+    background-color: #EEE;
+    padding: 0.5em;
+    width: 80%;
+}
 
 #logo {
     position: fixed;
@@ -101,14 +105,6 @@ small {
     background-image: url(/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png);
     background-repeat: no-repeat;
 }
-
-.formatter_pre, pre {
-    background: lightgray;
-    border: 1px black solid;
-    padding: 5px;
-    font-size: 120%;
-    width: 700px;
-}
 /* END index.css */
 
 
@@ -116,7 +112,7 @@ small {
 <script type="text/javascript">
 // BEGIN controls.js
 function nextSlide() {
-    window.location = 'slide20.html';
+    window.location = 'slide19c.html#end';
 }
 
 function prevSlide() {
@@ -170,9 +166,7 @@ document.onkeypress = handleKey
 <div id="topbar">
  <table width='100%'>
   <tr>
-   <td width="13%">
-    <img src="/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png" alt="Mason" />
-   </td>
+   <td width="13%"></td>
    <td align="center" width="73%">
     <a accesskey="s" href="index.html">Introduction to Mason</a>
    </td>
@@ -187,66 +181,28 @@ document.onkeypress = handleKey
 <!-- BEGIN slide -->
 <div id="content"><p />
  <div class="top_spacer"></div>
- <img name="img" id="img" width="250" src="images/342F0007.jpg" align=right>
+ <img name="img" id="img" width="250" src="images/globebig.gif" align=right>
  <p>
 
 
 </p>
-<h2>Configuration under mod_perl</h2>
+<h2>Other globals</h2>
 <ul>
-<li>The simplest possible mod_perl configuration:</li>
-</ul>
-<pre class="formatter_pre">
-SetHandler  perl-script
-PerlHandler HTML::Mason::ApacheHandler
-</pre>
-<ul>
-<li><strong>All</strong> requests are handled by Mason.</li>
+<li>Mason provide two other globals besides <tt>$m</tt>.</li>
 
 <ul>
-<li>this is probably a bad idea.</li>
+<li><tt>%ARGS</tt></li>
+<li><tt>$r</tt></li>
 </ul>
-<li>You probably want to limit what Mason handles:</li>
-</ul>
+<li><tt>%ARGS</tt> contains all of the arguments <em>passed</em> to the component</li>
 
-<pre>
-<span class="hilite_red">&lt;LocationMatch &quot;\.mhtml$&quot;&gt;</span>
-  SetHandler  perl-script
-  PerlHandler HTML::Mason::ApacheHandler
-<span class="hilite_red">&lt;/LocationMatch&gt;</span>
-</pre>
+<ul>
+<li>... but not defaults set by the <tt>&lt;%args&gt;</tt> block.</li>
+</ul></ul>
 
 
+ <small>continued...</small>
 </div>
 <!-- END slide.html -->
 <!-- END slide -->
-<!-- BEGIN bottom.html -->
-<div id="bottombar">
- <table width="100%">
-  <tr>
-   <td align="left" valign="middle">
-    <div>
-
-     <a accesskey='p' href="slide19a.html">&lt; &lt; Previous</a> |
-     <a accesskey='i' href="index.html">Index</a> |
-     <a accesskey='n' href="slide20.html">Next &gt;&gt;</a>
-
-    </div>
-   </td>
-   <td align="right" valign="middle">
-    Copyright &copy; 2005-2006 David Rolsky
-   </td>
-  </tr>
- </table>
-</div>
-<div id="logo"></div>
-
-<div id="spacer">
- <a name="end"></a>
-</div>
-</body>
-</html>
-<!-- END bottom.html -->
-
-
 

@@ -52,7 +52,7 @@ small {
 }
 
 #topbar {
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position:absolute;
     right: 5px;
@@ -61,8 +61,7 @@ small {
 }
 
 #bottombar {
-    display: none;
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position: fixed;
     right: 5px;
@@ -90,6 +89,11 @@ small {
     margin-top: 80px;
 }
 
+pre {
+    background-color: #EEE;
+    padding: 0.5em;
+    width: 80%;
+}
 
 #logo {
     position: fixed;
@@ -100,14 +104,6 @@ small {
     z-index:3;
     background-image: url(/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png);
     background-repeat: no-repeat;
-}
-
-.formatter_pre, pre {
-    background: lightgray;
-    border: 1px black solid;
-    padding: 5px;
-    font-size: 120%;
-    width: 700px;
 }
 /* END index.css */
 
@@ -170,9 +166,7 @@ document.onkeypress = handleKey
 <div id="topbar">
  <table width='100%'>
   <tr>
-   <td width="13%">
-    <img src="/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png" alt="Mason" />
-   </td>
+   <td width="13%"></td>
    <td align="center" width="73%">
     <a accesskey="s" href="">Introduction to Mason</a>
    </td>
@@ -188,65 +182,40 @@ document.onkeypress = handleKey
 <div id="content"><p />
  <div class="top_spacer"></div>
  <ol>
-  <li> <a href="slide1a.html">Basics</a>
-  <li> <a href="slide2.html">Basics</a>
-  <li> <a href="slide3.html">Component Calls</a>
-  <li> <a href="slide4a.html">autohandlers</a>
-  <li> <a href="slide5.html">autohandlers (cont)</a>
-  <li> <a href="slide6.html">autohandler example</a>
-  <li> <a href="slide7a.html">dhandlers</a>
-  <li> <a href="slide8a.html">Caching</a>
-  <li> <a href="slide9.html">Syntax</a>
-  <li> <a href="slide10.html">Syntax (cont)</a>
-  <li> <a href="slide11.html">Syntax (cont)</a>
-  <li> <a href="slide12.html">Blocks</a>
-  <li> <a href="slide13a.html">&lt;%args&gt;</a>
-  <li> <a href="slide14a.html">&lt;%args&gt;</a>
-  <li> <a href="slide15.html">Other non-Perl blocks</a>
-  <li> <a href="slide16.html">$m</a>
-  <li> <a href="slide17.html">$m</a>
-  <li> <a href="slide18a.html">Other globals</a>
-  <li> <a href="slide19a.html">Configuration under mod_perl</a>
-  <li> <a href="slide20.html">Configuration under mod_perl (cont)</a>
-  <li> <a href="slide21a.html">MVC(-ish) with MasonX::WebApp</a>
-  <li> <a href="slide22.html">MasonX::WebApp Highlights</a>
-  <li> <a href="slide23.html">Attributes</a>
-  <li> <a href="slide24a.html">Attributes (cont)</a>
-  <li> <a href="slide25a.html">Methods</a>
-  <li> <a href="slide26.html">Inline filters</a>
-  <li> <a href="slide27.html">Inline filters (cont)</a>
-  <li> <a href="slide28.html">Resources</a>
+  <li> <a href="slide1.html">Basics</a>
+  <li> <a href="slide2.html">A very simple component</a>
+  <li> <a href="slide3.html">Basics</a>
+  <li> <a href="slide4.html">How is it different from TT?</a>
+  <li> <a href="slide5.html">Component Calls</a>
+  <li> <a href="slide6a.html">autohandlers</a>
+  <li> <a href="slide7.html">autohandlers (cont)</a>
+  <li> <a href="slide8.html">autohandler example</a>
+  <li> <a href="slide9a.html">dhandlers</a>
+  <li> <a href="slide10.html">Caching</a>
+  <li> <a href="slide11.html">Caching self</a>
+  <li> <a href="slide12.html">Syntax</a>
+  <li> <a href="slide13.html">Syntax (cont)</a>
+  <li> <a href="slide14.html">Syntax (cont)</a>
+  <li> <a href="slide15.html">Blocks</a>
+  <li> <a href="slide16a.html">&lt;%args&gt;</a>
+  <li> <a href="slide17a.html">&lt;%args&gt;</a>
+  <li> <a href="slide18.html">Other non-Perl blocks</a>
+  <li> <a href="slide19.html">$m</a>
+  <li> <a href="slide20.html">$m</a>
+  <li> <a href="slide21.html">Other globals</a>
+  <li> <a href="slide22.html">%ARGS</a>
+  <li> <a href="slide23.html">$r</a>
+  <li> <a href="slide24a.html">Configuration under mod_perl</a>
+  <li> <a href="slide25.html">MVC Apps with Catalyst</a>
+  <li> <a href="slide26.html">Attributes</a>
+  <li> <a href="slide27a.html">Attributes (cont)</a>
+  <li> <a href="slide28a.html">Methods</a>
+  <li> <a href="slide29.html">Inline filters</a>
+  <li> <a href="slide30.html">Inline filters (cont)</a>
+  <li> <a href="slide31.html">Mason outside the web</a>
+  <li> <a href="slide32.html">Resources</a>
  </ol>
 </div>
 <!-- END index.html -->
 <!-- END index -->
-<!-- BEGIN bottom.html -->
-<div id="bottombar">
- <table width="100%">
-  <tr>
-   <td align="left" valign="middle">
-    <div>
-
-     <a accesskey='p' href="start.html">&lt; &lt; Previous</a> |
-     <a accesskey='i' href="">Index</a> |
-     <a accesskey='n' href="start.html">Next &gt;&gt;</a>
-
-    </div>
-   </td>
-   <td align="right" valign="middle">
-    Copyright &copy; 2005-2006 David Rolsky
-   </td>
-  </tr>
- </table>
-</div>
-<div id="logo"></div>
-
-<div id="spacer">
- <a name="end"></a>
-</div>
-</body>
-</html>
-<!-- END bottom.html -->
-
-
 

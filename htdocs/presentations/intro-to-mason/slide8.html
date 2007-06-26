@@ -2,13 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Syntax</title>
+<title>autohandler example</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
 <link rel='icon' HREF='favicon.png'>
-<style>
-<link rel="stylesheet" type="text/css" href="ARRAY(0x8a3ce4c)" />
+<link rel="stylesheet" type="text/css" href="css/hilite.css" />
 <style type="text/css"><!--
 /* BEGIN slide.css */
 hr {
@@ -53,7 +52,7 @@ small {
 }
 
 #topbar {
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position:absolute;
     right: 5px;
@@ -62,7 +61,7 @@ small {
 }
 
 #bottombar {
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position: fixed;
     right: 5px;
@@ -90,6 +89,11 @@ small {
     margin-top: 80px;
 }
 
+pre {
+    background-color: #EEE;
+    padding: 0.5em;
+    width: 80%;
+}
 
 #logo {
     position: fixed;
@@ -108,11 +112,11 @@ small {
 <script type="text/javascript">
 // BEGIN controls.js
 function nextSlide() {
-    window.location = 'slide9.html';
+    window.location = 'slide9a.html';
 }
 
 function prevSlide() {
-    window.location = 'slide7b.html#end';
+    window.location = 'slide7.html';
 }
 
 function indexSlide() {
@@ -162,7 +166,7 @@ document.onkeypress = handleKey
 <div id="topbar">
  <table width='100%'>
   <tr>
-   <td width="13%">Mason</td>
+   <td width="13%"></td>
    <td align="center" width="73%">
     <a accesskey="s" href="index.html">Introduction to Mason</a>
    </td>
@@ -177,58 +181,18 @@ document.onkeypress = handleKey
 <!-- BEGIN slide -->
 <div id="content"><p />
  <div class="top_spacer"></div>
- <img name="img" id="img" width="250" src="images/ffxscreen11.jpg" align=right>
+ <img name="img" id="img" width="250" src="images/pg02-car.gif" align=right>
  <p>
 
 
 </p>
-<h2>Syntax</h2>
+<h2>autohandler example</h2>
 <ul>
-<li>So far we&#39;ve seen:</li>
-
-<ul>
-<li>Substitution tags.</li>
-</ul></ul>
-<pre class="formatter_pre">&lt;% $who %&gt;
-</pre>
-<ul><ul>
-<li>Substitutions can be escaped:</li>
-</ul></ul>
-<pre>
-&lt;% $html_escape_me | <span class="hilite_red">h</span> %&gt; - &lt;% $uri_escape_me | <span class="hilite_red">u</span> %&gt;
-</pre>
+<li><a href="http://www.masonhq.com/">http://www.masonhq.com/</a></li>
+</ul>
 
 
 </div>
 <!-- END slide.html -->
 <!-- END slide -->
-<!-- BEGIN bottom.html -->
-<div id="bottombar">
- <table width="100%">
-  <tr>
-   <td align="left" valign="middle">
-    <div>
-
-     <a accesskey='p' href="slide7b.html#end">&lt; &lt; Previous</a> |
-     <a accesskey='i' href="index.html">Index</a> |
-     <a accesskey='n' href="slide9.html">Next &gt;&gt;</a>
-
-    </div>
-   </td>
-   <td align="right" valign="middle">
-    Copyright &copy; 2005-2006 David Rolsky
-   </td>
-  </tr>
- </table>
-</div>
-<div id="logo"></div>
-
-<div id="spacer">
- <a name="end"></a>
-</div>
-</body>
-</html>
-<!-- END bottom.html -->
-
-
 

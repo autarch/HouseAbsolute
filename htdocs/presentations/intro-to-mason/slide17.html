@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>$m</title>
+<title>Other non-Perl blocks</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
@@ -52,7 +52,7 @@ small {
 }
 
 #topbar {
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position:absolute;
     right: 5px;
@@ -61,8 +61,7 @@ small {
 }
 
 #bottombar {
-    display: none;
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position: fixed;
     right: 5px;
@@ -90,6 +89,11 @@ small {
     margin-top: 80px;
 }
 
+pre {
+    background-color: #EEE;
+    padding: 0.5em;
+    width: 80%;
+}
 
 #logo {
     position: fixed;
@@ -101,14 +105,6 @@ small {
     background-image: url(/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png);
     background-repeat: no-repeat;
 }
-
-.formatter_pre, pre {
-    background: lightgray;
-    border: 1px black solid;
-    padding: 5px;
-    font-size: 120%;
-    width: 700px;
-}
 /* END index.css */
 
 
@@ -116,11 +112,11 @@ small {
 <script type="text/javascript">
 // BEGIN controls.js
 function nextSlide() {
-    window.location = 'slide18a.html';
+    window.location = 'slide18.html';
 }
 
 function prevSlide() {
-    window.location = 'slide16.html';
+    window.location = 'slide16b.html#end';
 }
 
 function indexSlide() {
@@ -170,9 +166,7 @@ document.onkeypress = handleKey
 <div id="topbar">
  <table width='100%'>
   <tr>
-   <td width="13%">
-    <img src="/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png" alt="Mason" />
-   </td>
+   <td width="13%"></td>
    <td align="center" width="73%">
     <a accesskey="s" href="index.html">Introduction to Mason</a>
    </td>
@@ -187,64 +181,26 @@ document.onkeypress = handleKey
 <!-- BEGIN slide -->
 <div id="content"><p />
  <div class="top_spacer"></div>
- <img name="img" id="img" width="250" src="images/01.eminem.jpg" align=right>
+ <img name="img" id="img" width="250" src="images/er_jv_goalie__1_.jpg" align=right>
  <p>
 
 
 </p>
-<h2>$m</h2>
+<h2>Other non-Perl blocks</h2>
 <ul>
-<li>Methods include:</li>
+<li><tt>&lt;%text&gt;</tt> - not parsed for Mason constructs</li>
+<li><tt>&lt;%doc&gt;</tt> - ignored by Mason</li>
+<li><tt>&lt;%def&gt;</tt> and <tt>&lt;%method</tt> - contain subcomponents and methods</li>
 
 <ul>
-<li><tt>scomp&#40;&#41;</tt> - returns component output in a scalar</li>
-</ul></ul>
-<pre class="formatter_pre">
-my $link =
-    $m-&gt;scomp&#40; &#39;/lib/link_to_person.mas&#39;,
-               person =&gt; $person &#41;;
-</pre>
-<ul><ul>
-<li><tt>abort&#40;&#41;</tt> - stops processing, in its tracks!</li>
-</ul></ul>
-<pre class="formatter_pre">
-$m-&gt;abort unless $user-&gt;is_editor;
-</pre>
-<ul><ul>
-<li>... and many more.</li>
-</ul></ul>
+<li>... which are components embedded in other components.</li>
+</ul>
+<li><tt>&lt;%attr&gt;</tt> - simple key-value pairs</li>
+<li><tt>&lt;%flags&gt;</tt> - instructions for Mason</li>
+</ul>
 
 
 </div>
 <!-- END slide.html -->
 <!-- END slide -->
-<!-- BEGIN bottom.html -->
-<div id="bottombar">
- <table width="100%">
-  <tr>
-   <td align="left" valign="middle">
-    <div>
-
-     <a accesskey='p' href="slide16.html">&lt; &lt; Previous</a> |
-     <a accesskey='i' href="index.html">Index</a> |
-     <a accesskey='n' href="slide18a.html">Next &gt;&gt;</a>
-
-    </div>
-   </td>
-   <td align="right" valign="middle">
-    Copyright &copy; 2005-2006 David Rolsky
-   </td>
-  </tr>
- </table>
-</div>
-<div id="logo"></div>
-
-<div id="spacer">
- <a name="end"></a>
-</div>
-</body>
-</html>
-<!-- END bottom.html -->
-
-
 

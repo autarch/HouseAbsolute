@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Inline filters</title>
+<title>MVC Apps with Catalyst</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
@@ -52,7 +52,7 @@ small {
 }
 
 #topbar {
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position:absolute;
     right: 5px;
@@ -61,8 +61,7 @@ small {
 }
 
 #bottombar {
-    display: none;
-    background: #C7C7BC;
+    background: #E6E6DA;
     color: blue;
     position: fixed;
     right: 5px;
@@ -90,6 +89,11 @@ small {
     margin-top: 80px;
 }
 
+pre {
+    background-color: #EEE;
+    padding: 0.5em;
+    width: 80%;
+}
 
 #logo {
     position: fixed;
@@ -100,14 +104,6 @@ small {
     z-index:3;
     background-image: url(/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png);
     background-repeat: no-repeat;
-}
-
-.formatter_pre, pre {
-    background: lightgray;
-    border: 1px black solid;
-    padding: 5px;
-    font-size: 120%;
-    width: 700px;
 }
 /* END index.css */
 
@@ -170,9 +166,7 @@ document.onkeypress = handleKey
 <div id="topbar">
  <table width='100%'>
   <tr>
-   <td width="13%">
-    <img src="/home/autarch/presentations/mason-intro-spork/images/mason-trowel.png" alt="Mason" />
-   </td>
+   <td width="13%"></td>
    <td align="center" width="73%">
     <a accesskey="s" href="index.html">Introduction to Mason</a>
    </td>
@@ -188,51 +182,25 @@ document.onkeypress = handleKey
 <div id="content"><p />
  <div class="top_spacer"></div>
  
- <h2>Inline filters</h2>
+ <h2>MVC Apps with Catalyst</h2>
 <ul>
-<li>Can pass content to a component call:</li>
+<li>With Catalyst, controller code is all Perl</li>
 </ul>
+<pre class="formatter_pre">
+package MyApp::Controller::Use;
 
-<pre>
-<span class="hilite_blue">&lt;&amp;| /lib/fill_in_form.mas, data =&gt; $saved_args &amp;&gt;</span>
- &lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
-  &lt;input name=&quot;username&quot; type=&quot;text&quot; /&gt;
-  &lt;input name=&quot;password&quot; type=&quot;password&quot; /&gt;
- &lt;/form&gt;
-<span class="hilite_blue">&lt;/&amp;&gt;</span>
+use base &#39;Catalyst::Controller&#39;;
+
+sub view { ... }
+sub create { ... }
 </pre>
+<ul>
+<li>Go to <u>/user/view</u>, <u>/user/create</u></li>
+<li>Catalyst can use Mason for views</li>
+</ul>
 
 
 </div>
 <!-- END slide.html -->
 <!-- END slide -->
-<!-- BEGIN bottom.html -->
-<div id="bottombar">
- <table width="100%">
-  <tr>
-   <td align="left" valign="middle">
-    <div>
-
-     <a accesskey='p' href="slide24b.html#end">&lt; &lt; Previous</a> |
-     <a accesskey='i' href="index.html">Index</a> |
-     <a accesskey='n' href="slide26.html">Next &gt;&gt;</a>
-
-    </div>
-   </td>
-   <td align="right" valign="middle">
-    Copyright &copy; 2005-2006 David Rolsky
-   </td>
-  </tr>
- </table>
-</div>
-<div id="logo"></div>
-
-<div id="spacer">
- <a name="end"></a>
-</div>
-</body>
-</html>
-<!-- END bottom.html -->
-
-
 
