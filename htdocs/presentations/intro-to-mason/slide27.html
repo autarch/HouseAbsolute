@@ -2,13 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>MasonX::WebApp Highlights</title>
+<title>Methods</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
 <link rel='icon' HREF='favicon.png'>
 <link rel="stylesheet" type="text/css" href="css/hilite.css" />
 <style type="text/css"><!--
+body {
+    font-size: 170%;
+}
+
 /* BEGIN slide.css */
 hr {
     color: #202040;
@@ -46,8 +50,12 @@ div p {
     margin-right: 6pt;
 }
 
+tt {
+    font-size: 120%;
+}
+
 small {
-    font-size: 9pt;
+    font-size: 80%;
     font-style: italic;
 }
 
@@ -90,6 +98,7 @@ small {
 }
 
 pre {
+    font-size: 120%;
     background-color: #EEE;
     padding: 0.5em;
     width: 80%;
@@ -116,7 +125,7 @@ function nextSlide() {
 }
 
 function prevSlide() {
-    window.location = 'slide26b.html#end';
+    window.location = 'slide26.html';
 }
 
 function indexSlide() {
@@ -181,21 +190,24 @@ document.onkeypress = handleKey
 <!-- BEGIN slide -->
 <div id="content"><p />
  <div class="top_spacer"></div>
- <img name="img" id="img" width="250" src="images/highlights_jenn.jpg" align=right>
- <p>
-
-
-</p>
-<h2>MasonX::WebApp Highlights</h2>
+ 
+ <h2>Methods</h2>
 <ul>
-<li>Can dispatch direct to object methods</li>
-
+<li>Similar to attributes, but are entire &#40;embedded&#41; components:</li>
+</ul>
+<pre class="formatter_pre">
+&lt;%method title&gt;
+ &lt;% $m-&gt;request_args-&gt;{location} | h %&gt;
+&lt;/%method&gt;
+</pre>
 <ul>
-<li>Handle form submissions without Mason</li>
+<li>Also &#34;inherited&#34; from the autohandler</li>
+<li>Has special component call &#34;path&#34;:</li>
 </ul>
-<li>Can modify parameter before passing control to Mason</li>
-<li>Integrates session handling</li>
-</ul>
+
+<pre>
+&lt;h1&gt;<span class="hilite_blue">&lt;&amp; SELF:title &amp;&gt;</span>&lt;/h1&gt;
+</pre>
 
 
 </div>

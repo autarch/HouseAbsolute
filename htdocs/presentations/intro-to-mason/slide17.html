@@ -9,6 +9,10 @@
 <link rel='icon' HREF='favicon.png'>
 <link rel="stylesheet" type="text/css" href="css/hilite.css" />
 <style type="text/css"><!--
+body {
+    font-size: 170%;
+}
+
 /* BEGIN slide.css */
 hr {
     color: #202040;
@@ -46,8 +50,12 @@ div p {
     margin-right: 6pt;
 }
 
+tt {
+    font-size: 120%;
+}
+
 small {
-    font-size: 9pt;
+    font-size: 80%;
     font-style: italic;
 }
 
@@ -90,6 +98,7 @@ small {
 }
 
 pre {
+    font-size: 120%;
     background-color: #EEE;
     padding: 0.5em;
     width: 80%;
@@ -116,7 +125,7 @@ function nextSlide() {
 }
 
 function prevSlide() {
-    window.location = 'slide16b.html#end';
+    window.location = 'slide16.html';
 }
 
 function indexSlide() {
@@ -190,7 +199,7 @@ document.onkeypress = handleKey
 <ul>
 <li><tt>&lt;%text&gt;</tt> - not parsed for Mason constructs</li>
 <li><tt>&lt;%doc&gt;</tt> - ignored by Mason</li>
-<li><tt>&lt;%def&gt;</tt> and <tt>&lt;%method</tt> - contain subcomponents and methods</li>
+<li><tt>&lt;%def&gt;</tt> and <tt>&lt;%method&gt;</tt> - contain subcomponents and methods</li>
 
 <ul>
 <li>... which are components embedded in other components.</li>

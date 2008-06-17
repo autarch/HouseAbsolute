@@ -2,13 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Attributes</title>
+<title>Inline filters</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
 <link rel='icon' HREF='favicon.png'>
 <link rel="stylesheet" type="text/css" href="css/hilite.css" />
 <style type="text/css"><!--
+body {
+    font-size: 170%;
+}
+
 /* BEGIN slide.css */
 hr {
     color: #202040;
@@ -46,8 +50,12 @@ div p {
     margin-right: 6pt;
 }
 
+tt {
+    font-size: 120%;
+}
+
 small {
-    font-size: 9pt;
+    font-size: 80%;
     font-style: italic;
 }
 
@@ -90,6 +98,7 @@ small {
 }
 
 pre {
+    font-size: 120%;
     background-color: #EEE;
     padding: 0.5em;
     width: 80%;
@@ -112,7 +121,7 @@ pre {
 <script type="text/javascript">
 // BEGIN controls.js
 function nextSlide() {
-    window.location = 'slide29a.html';
+    window.location = 'slide29.html';
 }
 
 function prevSlide() {
@@ -182,20 +191,21 @@ document.onkeypress = handleKey
 <div id="content"><p />
  <div class="top_spacer"></div>
  
- <h2>Attributes</h2>
+ <h2>Inline filters</h2>
 <ul>
-<li>Components can have attributes</li>
+<li>Can pass content to a component call:</li>
+</ul>
 
-<ul>
-<li>static data structures accessed by name</li>
-</ul>
-<li>An example:</li>
-</ul>
-<pre class="formatter_pre">
-&lt;%attr&gt;
-left_column =&gt; [ &#39;stats&#39;, &#39;news&#39; ]
-&lt;/%attr&gt;
+<pre>
+<span class="hilite_blue">&lt;&amp;| /lib/fill_in_form.mas,</span>
+<span class="hilite_blue">    data =&gt; $saved_args &amp;&gt;</span>
+ &lt;form action=&quot;/login&quot; method=&quot;post&quot;&gt;
+  &lt;input name=&quot;username&quot; type=&quot;text&quot; /&gt;
+  &lt;input name=&quot;password&quot; type=&quot;password&quot; /&gt;
+ &lt;/form&gt;
+<span class="hilite_blue">&lt;/&amp;&gt;</span>
 </pre>
+
 
 </div>
 <!-- END slide.html -->

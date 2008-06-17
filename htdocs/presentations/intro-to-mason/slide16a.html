@@ -9,6 +9,10 @@
 <link rel='icon' HREF='favicon.png'>
 <link rel="stylesheet" type="text/css" href="css/hilite.css" />
 <style type="text/css"><!--
+body {
+    font-size: 170%;
+}
+
 /* BEGIN slide.css */
 hr {
     color: #202040;
@@ -46,8 +50,12 @@ div p {
     margin-right: 6pt;
 }
 
+tt {
+    font-size: 120%;
+}
+
 small {
-    font-size: 9pt;
+    font-size: 80%;
     font-style: italic;
 }
 
@@ -90,6 +98,7 @@ small {
 }
 
 pre {
+    font-size: 120%;
     background-color: #EEE;
     padding: 0.5em;
     width: 80%;
@@ -116,7 +125,7 @@ function nextSlide() {
 }
 
 function prevSlide() {
-    window.location = 'slide15.html';
+    window.location = 'slide15c.html#end';
 }
 
 function indexSlide() {
@@ -188,8 +197,21 @@ document.onkeypress = handleKey
 </p>
 <h2><%args></h2>
 <ul>
-<li>The most important non-Perl block is <tt>&lt;%args&gt;</tt>.</li>
+<li>This looks like real Perl, but it&#39;s not.</li>
 </ul>
+<pre class="formatter_pre">
+&lt;%args&gt;
+# Default to 5
+$size =&gt; 5
+# Required
+@items
+# Defaults to an empty hash
+%labels =&gt; &#40;&#41;
+&lt;/%args&gt;
+</pre>
+<ul><ul>
+<li>a declaration &#40;name + default&#41; cannot be &gt;1 line.</li>
+</ul></ul>
 
  <small>continued...</small>
 </div>

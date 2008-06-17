@@ -2,13 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Attributes</title>
+<title>Attributes (cont)</title>
 <meta name="Content-Type" content="text/html; charset=utf-8">
 <meta name="generator" content="Spork v0.20">
 <link rel='stylesheet' href='slide.css' type='text/css'>
 <link rel='icon' HREF='favicon.png'>
 <link rel="stylesheet" type="text/css" href="css/hilite.css" />
 <style type="text/css"><!--
+body {
+    font-size: 170%;
+}
+
 /* BEGIN slide.css */
 hr {
     color: #202040;
@@ -46,8 +50,12 @@ div p {
     margin-right: 6pt;
 }
 
+tt {
+    font-size: 120%;
+}
+
 small {
-    font-size: 9pt;
+    font-size: 80%;
     font-style: italic;
 }
 
@@ -90,6 +98,7 @@ small {
 }
 
 pre {
+    font-size: 120%;
     background-color: #EEE;
     padding: 0.5em;
     width: 80%;
@@ -112,7 +121,7 @@ pre {
 <script type="text/javascript">
 // BEGIN controls.js
 function nextSlide() {
-    window.location = 'slide27a.html';
+    window.location = 'slide27.html';
 }
 
 function prevSlide() {
@@ -182,20 +191,28 @@ document.onkeypress = handleKey
 <div id="content"><p />
  <div class="top_spacer"></div>
  
- <h2>Attributes</h2>
+ <h2>Attributes (cont)</h2>
 <ul>
-<li>Components can have attributes</li>
+<li>Available in an autohandler:</li>
+</ul>
+
+<pre>
+&lt;%init&gt;
+my $left =
+<span class="hilite_blue">    $m-&gt;request_comp-&gt;attr(&#39;left_column&#39;);</span>
+&lt;/%init&gt;
+
+&lt;div id=&quot;left-column&quot;&gt;
+<span class="hilite_green">% for my $comp (@$left) {</span>
+<span class="hilite_green"> &lt;&amp; &quot;/lib/column-boxes/$comp.mas&quot; &amp;&gt;</span>
+<span class="hilite_green">% }</span>
+&lt;/div&gt;
+</pre>
 
 <ul>
-<li>static data structures accessed by name</li>
+<li>Attributes are &#34;inherited&#34; from autohandlers</li>
 </ul>
-<li>An example:</li>
-</ul>
-<pre class="formatter_pre">
-&lt;%attr&gt;
-left_column =&gt; [ &#39;stats&#39;, &#39;news&#39; ]
-&lt;/%attr&gt;
-</pre>
+
 
 </div>
 <!-- END slide.html -->

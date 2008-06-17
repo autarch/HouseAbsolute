@@ -9,6 +9,10 @@
 <link rel='icon' HREF='favicon.png'>
 <link rel="stylesheet" type="text/css" href="css/hilite.css" />
 <style type="text/css"><!--
+body {
+    font-size: 170%;
+}
+
 /* BEGIN slide.css */
 hr {
     color: #202040;
@@ -46,8 +50,12 @@ div p {
     margin-right: 6pt;
 }
 
+tt {
+    font-size: 120%;
+}
+
 small {
-    font-size: 9pt;
+    font-size: 80%;
     font-style: italic;
 }
 
@@ -90,6 +98,7 @@ small {
 }
 
 pre {
+    font-size: 120%;
     background-color: #EEE;
     padding: 0.5em;
     width: 80%;
@@ -187,15 +196,13 @@ document.onkeypress = handleKey
 
 </p>
 <h2>Syntax (cont)</h2>
-<ul><ul>
-<li>Perl-lines - a line starting with a percent sign &#40;%&#41;.</li>
-</ul></ul>
-<pre class="formatter_pre">% $m-&gt;call_next;
-</pre>
-<ul><ul>
-<li>Component calls.</li>
-</ul></ul>
-<pre class="formatter_pre">&lt;&#38; footer, size =&gt; 2, links =&gt; \@links &#38;&gt;
+<ul>
+<li>The rest of Mason&#39;s syntax is mostly blocks like this:</li>
+</ul>
+<pre class="formatter_pre">
+&lt;%perl&gt;
+my $number = 2 ** 10;
+&lt;/%perl&gt;
 </pre>
 
 </div>
