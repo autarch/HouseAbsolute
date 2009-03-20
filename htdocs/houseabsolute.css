@@ -19,6 +19,10 @@ li {
   margin-top: 0.5em
 }
 
+h2, h4 {
+  color: #557CA0;
+}
+
 #top-image {
   border-bottom: 1px solid #99cc99;
 }
