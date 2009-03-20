@@ -49,6 +49,7 @@ div.menu ul li a {
   padding: 2px 10px 2px 10px;
   margin-left: 1px;
   font-size: 13px;
+  color: #669999;
 }
 
 div.menu ul li a.selected,
