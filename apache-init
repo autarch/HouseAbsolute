@@ -11,7 +11,7 @@ set -e
 
 NAME=apache-perl
 DAEMON=/usr/sbin/$NAME
-PIDFILE=/home/autarch/var/run/HA-$NAME.pid
+PIDFILE=/home/autarch/run/HA-$NAME.pid
 CONF=./httpd.conf
 APACHECTL=/usr/sbin/${NAME}ctl
 # note: SSD is required only at startup of the daemon.
