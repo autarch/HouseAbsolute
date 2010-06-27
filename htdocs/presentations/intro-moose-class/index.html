@@ -52,7 +52,7 @@ img#me05 {top: 43px;left: 36px;}
 
 <div class="slide">
   <h1>Introduction to Moose</h1>
-  <h2><a href="git://git.moose.perl.org/moose-presentations.git"><tt>git://git.moose.perl.org/moose-presentations.git</tt></a></h2>
+  <h2>Dave Rolsky</a>
 </div>
 
 <div class="slide">
@@ -218,7 +218,7 @@ use Moose;
   <ul>
     <li>AKA advice</li>
     <li>&quot;<strong>Before</strong> foo(), do this first&quot;</li>
-    <li>&quot;Do this <strong>after</strong> foo()</li>
+    <li>&quot;Do this <strong>after</strong> foo()&quot;</li>
     <li>&quot;Put this code <strong>around</strong> foo()&quot;</li>
   </ul>
 </div>
@@ -300,8 +300,8 @@ has blog_uri =&gt; (
     <span class="highlight">handles =&gt; { 'blog_host' =&gt; 'host' },</span>
 );
 
-<span class="highlight">$person->blog_host;</span>
-# really calls $person->blog_uri->host</code></pre>
+<span class="highlight">$person-&gt;blog_host;</span>
+# really calls $person-&gt;blog_uri-&gt;host</code></pre>
 </div>
 
 <div class="slide">
@@ -955,7 +955,7 @@ sub BUILD {
     <li>Calls <code>Person-&gt;BUILDARGS(@_)</code> to turn <code>@_</code> into a hashref</li>
     <li>Blesses a reference</li>
     <li>Populates attributes based on the hashref from #1</li>
-    <li>Calls <code>$new_object->BUILDALL($constructor_args)</code>
+    <li>Calls <code>$new_object-&gt;BUILDALL($constructor_args)</code>
         <br />... which calls all <code>BUILD</code> methods</li>    
     <li>Returns the object</li>
   </ol>
@@ -1127,7 +1127,7 @@ print $person-&gt;first_name; # Dave</code></pre>
 use Moose;
 
 # true
-Person->can('extends');</code></pre>
+Person-&gt;can('extends');</code></pre>
 
   <ul>
     <li>Not very hygienic</li>
@@ -1142,10 +1142,23 @@ use Moose;
 
 ...
 
-no Moose;
+<span class="highlight">no Moose;</span>
 
 # false
-Person->can('extends');</code></pre>
+Person-&gt;can('extends');</code></pre>
+</div>
+
+<div class="slide">
+  <h1>Cleaning Up Moose Droppings</h1>
+
+  <pre><code>package Person;
+<span class="highlight">use namespace::autoclean;</span>
+use Moose;
+
+...
+
+# false
+Person-&gt;can('extends');</code></pre>
 </div>
 
 <div class="slide">
@@ -1163,13 +1176,13 @@ Person->can('extends');</code></pre>
   <h1>Immutability</h1>
 
   <ul>
-    <li><span style="font-family: URW Chancery L; font-size: 140%">Stevan's Incantation of Fleet-Footedness</span></li>
+    <li><span style="font-family: URW Chancery L; font-size: 120%">Stevan's Incantation of Fleet-Footedness</span></li>
   </ul>
 
   <pre><code>package Person;
 use Moose;
 
-<span class="highlight">__PACKAGE__->meta->make_immutable;</span></code></pre>
+<span class="highlight">__PACKAGE__-&gt;meta-&gt;make_immutable;</span></code></pre>
 </div>
 
 <div class="slide">
@@ -1355,7 +1368,7 @@ sub print {
 
 # or ...
 
-Person-&gt;meta-&gt;does('Printable')</code></pre>
+Person-&gt;meta-&gt;does_role('Printable')</code></pre>
 
 </div>
 
@@ -1458,9 +1471,9 @@ use Moose;
 sub break {
     my $self = shift;
 
-    $self->break_it_down;
+    $self-&gt;break_it_down;
     if ( rand(1) &lt; 0.5 ) {
-        $self->break_bone;
+        $self-&gt;break_bone;
     }
 }</code></pre>
 </div>
@@ -1477,7 +1490,7 @@ sub break {
 </div>
 
 <div class="slide">
-  <h1>Hot Role-on-Role Action</h1>
+  <h1>Roles With Roles</h1>
 
   <pre><code>package Comparable;
 use Moose::Role;
@@ -1486,7 +1499,7 @@ requires 'compare';</code></pre>
 </div>
 
 <div class="slide">
-  <h1>Hot Role-on-Role Action</h1>
+  <h1>Roles With Roles</h1>
 
   <pre><code>package TestsEquality;
 use Moose::Role;
@@ -1495,7 +1508,7 @@ with 'Comparable';
 
 sub is_equal {
     my $self = shift;
-    return $self->compare(@_) == 0;
+    return $self-&gt;compare(@_) == 0;
 }</code></pre>
 </div>
 
@@ -1510,8 +1523,8 @@ with 'TestsEquality';
 # Satisfies the Comparable role
 sub compare { ... }
 
-Integer->does('TestsEquality'); # true
-Integer->does('Comparable'); # also true!</code></pre>
+Integer-&gt;does('TestsEquality'); # true
+Integer-&gt;does('Comparable'); # also true!</code></pre>
 </div>
 
 <div class="slide">
@@ -1533,11 +1546,11 @@ with 'HasSubProcess';
 <div class="slide">
   <h1>Delayed Conflict</h1>
 
-  <pre><code>package StateOfTexas;
+  <pre><code>package SysadminAssassin;
 with 'Killer';</code></pre>
 
   <ul>
-    <li><code>StateOfTexas</code> must implement its own <code>execute</code></li>
+    <li><code>SysadminAssassin</code> must implement its own <code>execute</code></li>
     <li>But loading the <code>Killer</code> role by itself does not cause an error</li>
   </ul>
 </div>
@@ -1618,7 +1631,7 @@ has [ 'left', 'right' ] => (
 
   <pre><code>use Moose::Util qw( apply_all_roles );
 
-my $fragile_person = Person->new( ... );
+my $fragile_person = Person-&gt;new( ... );
 apply_all_roles( $fragile_person,
                  'IsFragile' );</code></pre>
 
@@ -1774,8 +1787,8 @@ has first_name =&gt; (
     <span class="current incremental">required =&gt; 1,</span>
 );
 
-<span class="incremental">Person->new( first_name =&gt; undef ); # ok
-Person->new(); # kaboom</span></code></pre>
+<span class="incremental">Person-&gt;new( first_name =&gt; undef ); # ok
+Person-&gt;new(); # kaboom</span></code></pre>
 </div>
 
 <div class="slide">
@@ -2045,11 +2058,11 @@ has shoe_size => (
     <span class="highlight">init_arg =&gt; 'foot_size',</span>
 );
 
-Person->new( <span class="wrong">shoe_size =&gt; 13</span> );
+Person-&gt;new( <span class="wrong">shoe_size =&gt; 13</span> );
 
 my $person =
-    Person->new( <span class="right">foot_size =&gt; 13</span> );
-print $person->shoe_size;</code></pre>
+    Person-&gt;new( <span class="right">foot_size =&gt; 13</span> );
+print $person-&gt;shoe_size;</code></pre>
 </div>
 
 <div class="slide">
@@ -2063,7 +2076,7 @@ has shoes => (
     <span class="highlight">init_arg =&gt; undef,</span>
 );
 
-Person->new( <span class="wrong">shoes =&gt; Shoes-&gt;new</span> );</code></pre>
+Person-&gt;new( <span class="wrong">shoes =&gt; Shoes-&gt;new</span> );</code></pre>
 </div>
 
 <div class="slide">
@@ -2384,7 +2397,7 @@ after clear_password =&gt; sub {
         $self-&gt;$orig(
             $self-&gt;_munge_insert(@_) );
 
-    $new_user->_assign_uri;
+    $new_user-&gt;_assign_uri;
     return $new_user;
 };</code></pre>
 </div>
@@ -2595,6 +2608,7 @@ Item
                 Num
                     Int
                 ClassName
+                RoleName
 </pre>
 </div>
 
@@ -2748,7 +2762,7 @@ class_type 'DateTime';</code></pre>
 
 <hr />
 
-<pre><code>subtype 'DateTime',
+<pre><code>subtype     'DateTime',
     as      'Object',
     where   { $_-&gt;isa('DateTime') },
     message { ... };</code></pre>
@@ -2763,7 +2777,7 @@ role_type 'Printable';</coe></pre>
 <hr />
 
 <pre><code>subtype 'Printable',
-    as      'Object',
+    as  'Object',
     where
         { Moose::Util::does_role(
               $_, 'Printable' ) },
@@ -2796,7 +2810,7 @@ enum Color =&gt; qw( red blue green ) );</code></pre>
 <pre><code>my %ok = map { $_ =&gt; 1 }
              qw( red blue green );
 
-subtype 'Color'
+subtype     'Color'
     as      'Str',
     where   { $ok{$_} },
     message { ... };</code></pre>
@@ -3401,7 +3415,7 @@ has history =&gt; (
 use Moose;
 has _favorite_numbers =&gt; (
     traits   =&gt; [ 'Array' ],
-    is       =&gt; 'ro',
+    is       =&gt; 'bare',
     isa      =&gt; 'ArrayRef[Int]',
     default  =&gt; sub { [] },
     init_arg =&gt; undef,
@@ -3562,6 +3576,7 @@ print <span class="highlight">Person-&gt;meta
     <li>Use <code>weak_ref</code> to avoid circular references</li>
     <li>Use trigger to do an action post-attribute write</li>
     <li>Use delegations to hide "internal" objects</li>
+    <li>Use native delegations to treat Perl types as objects</li>
     <li>Traits and metaclasses let you extend Moose's core attribute features</li>
   </ul>
 </div>
@@ -3581,11 +3596,7 @@ Iterate til this passes all its tests</pre>
 </div>
 
 <div class="slide fake-slide0">
-  <h1>Part 7: Introspection</h1>
-</div>
-
-<div class="slide fake-slide0">
-  <h1>Part 8: A Brief Tour of MooseX</h1>
+  <h1>Part 7: A Brief Tour of MooseX</h1>
 </div>
 
 <div class="slide">
@@ -3719,7 +3730,7 @@ sub run { ... }</code></pre>
 
 use App::CLI;
 
-<span class="highlight">App::CLI->new_with_options()</span>->run();</code></pre>
+<span class="highlight">App::CLI-&gt;new_with_options()</span>-&gt;run();</code></pre>
 
 <pre>$ myapp-cli \
    --file foo \
@@ -3779,9 +3790,15 @@ with HasCollection =&gt; { type =&gt; 'Int' };</code></pre>
   <h1>Questions?</h1>
 </div>  
 
+<!--
+<div class="slide fake-slide0">
+  <h1>Part 8: Introspection</h1>
+</div>
+
 <div class="slide fake-slide0">
   <h1>Part 9: Writing Moose Extensions</h1>
 </div>
+-->
 
 <div class="slide fake-slide0">
   <h1>The End</h1>
