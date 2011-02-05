@@ -52,7 +52,7 @@ img#me05 {top: 43px;left: 36px;}
 
 <div class="slide">
   <h1>Introduction to Moose</h1>
-  <h2>Dave Rolsky</a>
+  <h2>Dave Rolsky</h2>
 </div>
 
 <div class="slide">
@@ -71,7 +71,8 @@ img#me05 {top: 43px;left: 36px;}
   <ul>
     <li><strong>Declarative</strong> OO sugar</li>
     <li>Introspectable</li>
-    <li>Extensible (MooseX::* on CPAN)</li>
+    <li>Extensible (188 MooseX::* on CPAN)</li>
+    <li>Community approved (1200+ downstream dependents on CPAN)</li>
   </ul>
 </div>
 
@@ -154,7 +155,7 @@ img#me05 {top: 43px;left: 36px;}
   <pre><code>package Person;
 use Moose;
 
-<span class="highlight">has first_name =&gt; ( is =&gt; 'rw' );</span></code></pre>
+<span class="highlight">has first_name =&gt; ( is =&gt; 'ro' );</span></code></pre>
 
 </div>
 
@@ -892,8 +893,8 @@ use Moose;</code></pre>
   <h1>BUILDARGS</h1>
 
   <ul>
-    <li>Takes <code>@_</code>, returns a hash reference of attribute name/value pairs</li>
-    <li>Accepts a hash or hashref; throws otherwise</li>
+    <li>Processes <code>new</code>'s <code>@_</code>, returns a hash reference of attribute name/value pairs</li>
+    <li>Accepts a hash or hashref; errors otherwise</li>
     <li>Provide your own for other cases</li>
     <li><strong>Always</strong> call <code>$class-&gt;SUPER::BUILDARGS(@_)</code> as a fallback!</li>
   </ul>
@@ -967,6 +968,7 @@ sub BUILD {
   <ul>
     <li>Technically it's a hash reference</li>
     <li><span class="wrong">If you <em>ever</em> treat it as one <strong>you are doing it wrong!</strong></span></li>
+    <li>Moose probably provides a feature to do what you need</li>
   </ul>
 </div>
 
@@ -976,6 +978,7 @@ sub BUILD {
   <ul>
     <li>Like <code>DESTROY</code>, but Moose makes sure all <code>DEMOLISH</code> methods in a hierarchy are called</li>
     <li>Called in normal inheritance order, children to parents</li>
+    <li><em>Never</em> called by you, only by Perl itself</li>
   </ul>
 </div>
 
@@ -1039,6 +1042,7 @@ extends 'LWP';</code></pre>
   <ul>
     <li><code>override</code> is another method modifier</li>
     <li>An alternative to Perl's <code>SUPER::</code></li>
+    <li><em>Declares</em> your intent to override a method</li>
   </ul>
 </div>
 
@@ -1050,13 +1054,13 @@ use Moose;
 
 <span class="current incremental">extends 'Person';</span>
 
-<span class="incremental">override</span> work =&gt; sub {
+<span class="incremental">override</span> <span class="incremental">work</span> <span class="incremental">=&gt; sub {
     my $self = shift;
 
     die "Pay me first"
         unless $self-&gt;got_paid;
-    <span class="incremental">super();</span>
-}<span class="incremental">;</span></code></pre>
+    super();
+}</span><span class="incremental">;</span></code></pre>
 </div>
 
 <div class="slide">
@@ -1065,7 +1069,7 @@ use Moose;
   <ul>
     <li>Mostly like <code>$self-&gt;SUPER::work(@_)</code></li>
     <li><strong>But</strong> cannot change <code>@_</code>!</li>
-    <li>Binds the parent's method at compile time</li>
+    <li>Binds the parent's method <strong>correctly</strong> at compile time</li>
     <li>Parent determined by checking <code>Child-&gt;meta()-&gt;superclasses()</code></li>
   </ul>
 </div>
@@ -1107,8 +1111,7 @@ has first_name =&gt; ( <span class="highlight">is =&gt; 'ro'</span> );
 my $person =
     Person-&gt;new( first_name =&gt; 'Dave' );
 
-$person-&gt;first_name('Stevan');
-print $person-&gt;first_name; # Dave</code></pre>
+$person-&gt;first_name('Stevan'); # dies</code></pre>
 
 </div>
 
@@ -1233,6 +1236,8 @@ use Moose;
 
 # perl install-moose (if needed)
 
+## Read the instructions in t/01-classes.t
+
 # perl bin/prove -lv t/01-classes.t
 
 # edit lib/Person.pm and lib/Employee.pm
@@ -1304,23 +1309,25 @@ sub print {
   <pre><code>package Person;
 use Moose;
 
-with 'HasPermissions';</code></pre>
+with 'Printable';</code></pre>
 </div>
 
 <div class="slide">
   <h1>Classes Consume Roles</h1>
 
-<pre><code>my $person = Person-&gt;new(
+<pre><code>package Person;
+
+sub as_string { $_[0]-&gt;first_name() }
+
+...
+
+my $person = Person-&gt;new(
     first_name   =&gt; 'Kenichi',
     last_name    =&gt; 'Asai',
     access_level =&gt; 42,
 );
 
-print $person-&gt;full_name
-    . ' has '
-    . $person-&gt;can_access(42)
-        ? 'great power'
-        : 'little power';</code></pre>
+$person-&gt;print();</code></pre>
 </div>
 
 <div class="slide">
@@ -1337,7 +1344,9 @@ print $person-&gt;full_name
 <pre><code>package Person;
 use Moose;
 
-<span class="highlight">with 'Printable';</span></code></pre>
+<span class="highlight">with 'Printable';</span>
+
+sub as_string { $_[0]-&gt;first_name() }</code></pre>
 </div>
 
 <div class="slide">
@@ -1347,6 +1356,8 @@ use Moose;
 use Moose;
 
 <span class="delete">with 'Printable';</span>
+
+sub as_string { $_[0]-&gt;first_name() }
 
 <span class="highlight">has has_been_printed =&gt; ( is =&gt; 'rw'  );
 
@@ -1428,64 +1439,12 @@ use Moose;
 </div>
 
 <div class="slide">
-  <h1>Method Aliasing</h1>
-
-  <pre><code>package FragileDancer;
-use Moose;
-
-<span class="highlight">with 'IsFragile' =>
-         { -alias =>
-               { break => 'break_bone' } },
-     'CanBreakdance' =>
-         { -alias =>
-               { break => 'break_it_down' } };</span></code></pre>
+  <h1>Conflicts Are a Smell</h1>
 
   <ul>
-    <li>Renames the roles' methods</li>
-    <li>Still conflicts, need to <code>exclude</code> as well</li>
-  </ul>
-</div>
-
-<div class="slide">
-  <h1>Method Exclusion</h1>
-
-  <pre><code>package FragileDancer;
-use Moose;
-
-<span class="highlight">with 'IsFragile' =>
-         { -alias =>
-               { break => 'break_bone' },
-           -excludes => 'break' },
-     'CanBreakdance' =>
-         { -alias =>
-               { break => 'break_it_down' },
-           -excludes => 'break' };</span></code></pre>
-</div>
-
-<div class="slide">
-  <h1>And then ...</h1>
-
-  <pre><code>package FragileDancer;
-use Moose;
-
-sub break {
-    my $self = shift;
-
-    $self-&gt;break_it_down;
-    if ( rand(1) &lt; 0.5 ) {
-        $self-&gt;break_bone;
-    }
-}</code></pre>
-</div>
-
-<div class="slide">
-  <h1>Still Full of Fail</h1>
-
-  <ul>
-    <li>Roles are also about semantics!</li>
-    <li>We've fulfilled the letter and lost the spirit</li>
+    <li>Roles are about semantics!</li>
     <li>Roles have a <em>meaning</em></li>
-    <li>Think twice before blindly aliasing and excluding methods!</li>
+    <li>Method name conflicts smell like bad design</li>
   </ul>
 </div>
 
@@ -1578,7 +1537,7 @@ use Moose;
 
 <span class="incremental">with 'HasSize';
 
-has size => ( is => 'ro' );</span></code></pre>
+has size =&gt; ( is =&gt; 'ro' );</span></code></pre>
 </div>
 
 <div class="slide">
@@ -1592,7 +1551,7 @@ requires 'size';
 package Shirt;
 use Moose;
 
-has size => ( is => 'ro' );
+has size =&gt; ( is =&gt; 'ro' );
 
 with 'HasSize';</code></pre>
 </div>
@@ -1614,9 +1573,9 @@ with 'HasSize';</code></pre>
   <pre><code>package Comparison;
 use Moose;
 
-has [ 'left', 'right' ] => (
-    is   => 'ro',
-    <span class="highlight">does => 'Comparable',</span>
+has [ 'left', 'right' ] =&gt; (
+    is   =&gt; 'ro',
+    <span class="highlight">does =&gt; 'Comparable',</span>
 );
 </code></pre>
 
@@ -1705,8 +1664,6 @@ requires 'compare';
   <h1>Real Examples</h1>
 
   <ul>
-    <li>Column and ColumnAlias both <em>do</em> ColumnLike</li>
-    <li>ColumnLike things can be used in certain parts of queries</li>
     <li>All queries <em>do</em> HasWhereClause</li>
     <li>Select <em>does</em> Comparable and Selectable (for subselects)</li>
     <li>A where clause requires its components to <em>do</em> Comparable</li>
@@ -1765,6 +1722,15 @@ use Moose;
 
 has 'color'     =&gt; ( is =&gt; 'ro' );
 has 'is_ripped' =&gt; ( is =&gt; 'rw' );</code></pre>
+</div>
+
+<div class="slide">
+  <h1>Read-only vs Read-write</h1>
+
+  <ul>
+    <li>Read-only is preferred</li>
+    <li>Minimize state in your application</li>
+  </ul>
 </div>
 
 <div class="slide">
@@ -1853,6 +1819,7 @@ use Moose;
 
 has bank =&gt; (
     is      =&gt; 'rw',
+    # THIS WILL NOT WORK
     <span class="wrong">default =&gt; Bank-&gt;new(
                    name =&gt; 'Spire FCU' ),</span>
 );</code></pre>
@@ -1871,22 +1838,6 @@ use Moose;
 has packages =&gt; (
     is      =&gt; 'rw',
     default =&gt; <span class="highlight">sub { [] }</span>,
-);</code></pre>
-</div>
-
-<div class="slide">
-  <h1>What if I Want to Share?</h1>
-
-  <pre><code>package Person;
-use Moose;
-
-my $highlander_bank =
-    Bank-&gt;new(
-        name =&gt; 'Clan MacLeod Trust' );
-
-has bank =&gt; (
-    is      =&gt; 'rw',
-    default =&gt; sub { $highlander_bank },
 );</code></pre>
 </div>
 
@@ -1913,7 +1864,7 @@ has bank =&gt; (
 sub _build_bank {
     my $self = shift;
     return Bank-&gt;new(
-        name => 'Spire FCU' );
+        name =&gt; 'Spire FCU' );
 }</code></pre>
 </div>
 
@@ -1970,7 +1921,7 @@ use Moose;
 
 has shoe_size =&gt; (
     is       =&gt; 'ro',
-    required =&gt; 'ro',
+    required =&gt; 1,
 );</code></pre>
 </div>
 
@@ -1980,7 +1931,7 @@ has shoe_size =&gt; (
   <pre><code>has shoes =&gt; (
     is      =&gt; 'ro',
     <span class="highlight">lazy    =&gt; 1,</span>
-    builder => '_build_shoes',
+    builder =&gt; '_build_shoes',
 );
 
 sub _build_shoes {
@@ -2053,7 +2004,7 @@ has account =&gt; (
   <pre><code>package Person;
 use Moose;
 
-has shoe_size => (
+has shoe_size =&gt; (
     is       =&gt; 'ro',
     <span class="highlight">init_arg =&gt; 'foot_size',</span>
 );
@@ -2071,7 +2022,7 @@ print $person-&gt;shoe_size;</code></pre>
 <pre><code>package Person;
 use Moose;
 
-has shoes => (
+has shoes =&gt; (
     is       =&gt; 'ro',
     <span class="highlight">init_arg =&gt; undef,</span>
 );
@@ -2095,15 +2046,7 @@ Person-&gt;new( <span class="wrong">shoes =&gt; Shoes-&gt;new</span> );</code></
 
   <ul>
     <li>By default, subclasses inherit attribute as-is</li>
-    <li>Can change some attribute parameters in subclasses
-      <ul>
-        <li>default</li>
-        <li>builder</li>
-        <li>required</li>
-        <li>lazy</li>
-        <li>others we've not yet covered</li>
-      </ul>
-    </li>
+    <li>Can change attribute parameters in subclasses</li>
   </ul>
 </div>   
 
@@ -2456,60 +2399,6 @@ around run</span> =&gt; sub {
 </div>
 
 <div class="slide">
-  <h1>Augment and Inner</h1>
-
-  <ul>
-    <li>Inverted <code>super</code></li>
-    <li>From least- to most-specific</li>
-    <li>Like Mason's autohandler feature</li>
-    <li>Grandparent to parent to child</li>
-    <li>Not allowed in roles</li>
-  </ul>
-</div>
-
-<div class="slide">
-  <h1>Augment and Inner</h1>
-
-  <pre><code>package Document;
-
-sub xml { '&lt;doc&gt;' . <span class="highlight">inner()</span> . '&lt;/doc&gt;' }
-
-package Report;
-extends 'Document';
-<span class="highlight">augment xml</span> =&gt;
-    sub { title() . <span class="highlight">inner()</span> . summary() };
-
-package TPSReport;
-extends 'Report';
-<span class="highlight">augment xml</span> =&gt;
-    sub { tps_xml() . <span class="highlight">inner()</span> };</code></pre>
-</div>
-
-<div class="slide">
-  <h1>Augment and Inner</h1>
-
-  <ul>
-    <li>When we call <code>$tps-&gt;xml</code> ...
-      <ul>
-        <li><code>Document-&gt;xml</code></li>
-        <li><code>Report-&gt;xml</code></li>
-        <li><code>TPSReport-&gt;xml</code></li>
-      </ul>
-    </li>
-  </ul>
-</div>
-
-<div class="slide">
-  <h1>Augment and Inner Usage</h1>
-
-  <ul>
-    <li>Call <code>inner()</code> to "fill in the blank"</li>
-    <li>Requires designing for subclassing</li>
-    <li>Call <code>inner()</code> in the terminal class, just in case</li>
-  </ul>
-</div>
-
-<div class="slide">
   <h1>Method Modifiers Summary</h1>
 
   <ul>
@@ -2533,23 +2422,9 @@ extends 'Report';
         <li>alter parameters passed to the original method</li>
         <li>alter the return value of the original method</li>
         <li>not call the original method at all (or call a <em>different</em> method)</li>
+        <li>When using modifiers in a role, require the modified method</li>
       </ul>
     </li>
-  </ul>
-</div>
-
-<div class="slide">
-  <h1>Method Modifiers Summary</h1>
-
-  <ul>
-    <li>When using modifiers in a role, require the modified method</li>
-    <li>Use <code>augment</code> and <code>inner</code> to invert the normal subclassing flow ...
-      <ul>
-        <li>Least- to most-specific (parents to children)</li>
-        <li>Build in "insertability" (stick more stuff in the "middle")</li>
-      </ul>
-    </li>
-    <li>Always call <code>inner</code> in the most specific subclass to allow for future extension</li>
   </ul>
 </div>
 
@@ -2635,15 +2510,12 @@ Item
   <h1>Bool</h1>
 
   <h2>True</h2>
-  <pre><code>1
-924.1
-'true'
-{}</code></pre>
+  <pre><code>1</code></pre>
 
   <h2>False</h2>
   <pre><code>0
-0.0
 '0'
+''
 undef</code></pre>
 
   <ul>
@@ -2772,7 +2644,7 @@ class_type 'DateTime';</code></pre>
   <h1>Subtype Shortcuts - <code>role_type</code></h1>
 
   <pre><code>use Moose::Util::TypeConstraints;
-role_type 'Printable';</coe></pre>
+role_type 'Printable';</code></pre>
 
 <hr />
 
@@ -2803,7 +2675,7 @@ duck_type Car =&gt; qw( run break_down );</code></pre>
   <h1>Subtype Shortcuts - <code>enum</code></h1>
 
   <pre><code>use Moose::Util::TypeConstraints;
-enum Color =&gt; qw( red blue green ) );</code></pre>
+enum Color =&gt; qw( red blue green );</code></pre>
 
 <hr />
 
@@ -2881,7 +2753,8 @@ coerce 'My::DateTime',
 <div class="slide">
   <h1>Coercion Examples</h1>
 
-  <pre><code>coerce 'ArrayRef[Int]',
+  <pre><code># BAD CODE - DO NOT COPY
+coerce 'ArrayRef[Int]',
     from 'Int',
     via  { [ $_ ] };</code></pre>
 
@@ -2923,6 +2796,19 @@ subtype ...;
 
 no Moose;
 <span class="highlight">no Moose::Util::TypeConstraints;</span></code></pre>
+</div>
+
+<div class="slide">
+  <h1>Questions So Far?</h1>
+</div>  
+
+<div class="slide">
+  <h1>Exercises</h1>
+
+  <pre># cd exercises
+# perl bin/prove -lv t/05-types.t
+
+Iterate til this passes all its tests</pre>
 </div>
 
 <div class="slide">
@@ -3056,9 +2942,9 @@ coerce <span class="highlight">ArrayOfInt</span>
 
 use MyApp::Types qw( ArrayOfInt );
 
-has transaction_history => (
-    is  => 'rw',
-    isa => ArrayOfInt,
+has transaction_history =&gt; (
+    is  =&gt; 'rw',
+    isa =&gt; ArrayOfInt,
 );</code></pre>
 </div>
 
@@ -3101,15 +2987,6 @@ has transaction_history => (
 <div class="slide">
   <h1>Questions?</h1>
 </div>  
-
-<div class="slide">
-  <h1>Exercises</h1>
-
-  <pre># cd exercises
-# perl bin/prove -lv t/05-types.t
-
-Iterate til this passes all its tests</pre>
-</div>
 
 <div class="slide fake-slide0">
   <h1>Part 6: Advanced Attributes</h1>
@@ -3251,7 +3128,7 @@ $alice-&gt;friend($bob);</code></pre>
 
 has lungs =&gt; (
     is      =&gt; 'ro',
-    isa     => 'Lungs',
+    isa     =&gt; 'Lungs',
     <span class="highlight">handles =&gt; [ 'inhale', 'exhale' ],</span>
 );</code></pre>
 
@@ -3415,7 +3292,6 @@ has history =&gt; (
 use Moose;
 has _favorite_numbers =&gt; (
     traits   =&gt; [ 'Array' ],
-    is       =&gt; 'bare',
     isa      =&gt; 'ArrayRef[Int]',
     default  =&gt; sub { [] },
     init_arg =&gt; undef,
@@ -3478,7 +3354,7 @@ has account =&gt; (
     isa     =&gt; 'BankAccount',
     handles =&gt; {
         receive_100 =&gt;
-            <span class="highlight">[ 'deposit', 100 ]</span>
+            <span class="highlight">[ 'deposit', 100 ]</span>,
         give_100    =&gt;
             <span class="highlight">[ 'withdraw', 100 ]</span>
     },
@@ -3595,8 +3471,20 @@ print <span class="highlight">Person-&gt;meta
 Iterate til this passes all its tests</pre>
 </div>
 
+<div class="slide">
+  <h1>CYOA</h1>
+
+  <p>
+    If there is time, keep going ...
+  </p>
+
+  <p>
+    Otherwise, jump to slide 269 ...
+  </p>
+</div>
+
 <div class="slide fake-slide0">
-  <h1>Part 7: A Brief Tour of MooseX</h1>
+  <h1>Bonus: A Brief Tour of MooseX</h1>
 </div>
 
 <div class="slide">
@@ -3604,7 +3492,7 @@ Iterate til this passes all its tests</pre>
 
   <ul>
     <li><strong>Not comprehensive</strong></li>
-    <li>152 MooseX distributions on CPAN as of 02/02/2010</li>
+    <li>188 MooseX distributions on CPAN as of 02/03/2011</li>
     <li>Some of them are crap</li>
   </ul>
 </div>
@@ -3625,7 +3513,7 @@ Iterate til this passes all its tests</pre>
   <h1>MooseX::Declare</h1>
 
 <pre><code>use MooseX::Declare;
-use 5.10.0; # for say
+use 5.12.0; # for say
 
 class Person {
     has greeting =&gt;
@@ -3644,7 +3532,7 @@ class Person {
     <li>Still experimental-ish, but seeing more and more use</li>
     <li><strong>Not</strong> a source filter!</li>
     <li>Hooks into the Perl parser rather than filtering all your code</li>
-    <li>But not supported by <code>PPI</code>, <code>perltidy</code>, etc.</li> (yet?)
+    <li>But not supported by <code>PPI</code>, <code>perltidy</code>, etc. (yet?)</li>
   </ul>
 </div>
 
@@ -3790,18 +3678,21 @@ with HasCollection =&gt; { type =&gt; 'Int' };</code></pre>
   <h1>Questions?</h1>
 </div>  
 
-<!--
-<div class="slide fake-slide0">
-  <h1>Part 8: Introspection</h1>
-</div>
+<div class="slide">
+  <h1>Moose-using Modules</h1>
 
-<div class="slide fake-slide0">
-  <h1>Part 9: Writing Moose Extensions</h1>
-</div>
--->
+  <p>
+    For further reading, a few modules which use Moose ...
+  </p>
 
-<div class="slide fake-slide0">
-  <h1>The End</h1>
+  <ul>
+    <li><a href="http://search.cpan.org/dist/Catalyst-Runtime">Catalyst</a></li>
+    <li><a href="http://search.cpan.org/dist/CHI">CHI</a></li>
+    <li><a href="http://search.cpan.org/dist/Devel-REPL">Devel::REPL</a></li>
+    <li><a href="http://search.cpan.org/dist/Email-Sender">Email::Sender</a></li>
+    <li><a href="http://search.cpan.org/dist/Fey">Fey</a></li>
+    <li><a href="http://search.cpan.org/dist/Net-Twitter">Net::Twitter</a></li>
+  </ul>
 </div>
 
 <div class="slide">
@@ -3816,6 +3707,10 @@ with HasCollection =&gt; { type =&gt; 'Int' };</code></pre>
         <br />
         <span style="font-size:80%; white-space: nowrap">git://jules.scsys.co.uk/gitmo/moose-presentations</span></li>
   </ul>
+</div>
+
+<div class="slide fake-slide0">
+  <h1>The End</h1>
 </div>
 
 </div> 
