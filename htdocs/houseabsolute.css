@@ -1,9 +1,14 @@
+html {
+  background-color: #f9f9f9;
+  margin: auto;
+  width: 960px;
+}
+
 body {
   margin: 0;
+  padding: 0 10px 10px 10px;
 
-  background-image: url(/i/bg.gif);
-  background-repeat: repeat-y;
-  background-color: white;
+  background: white url(/i/bg.gif) repeat-y 6px 0;
 
   font-family: verdana, helvetica, sans-serif;
   font-size: 13px;
@@ -28,7 +33,6 @@ h2, h4 {
 }
 
 div.menu {
-  width: 90%;   
   text-align: right;
 }
 
@@ -62,15 +66,8 @@ div.menu ul li a.selected {
   text-decoration: none;
 }
 
-#hac-logo {
-  position: absolute;
-  top: 61px;
-  left: 1px;
-}
-
 #content {
   margin-left: 140px;
-  margin-right: 35%;
   margin-top: 3em;
 }
 
@@ -81,11 +78,11 @@ div.menu ul li a.selected {
 
 /* Resume page */
 
-#skills tr {
+#skills-table tr {
   vertical-align: top;
 }
 
-#skills tr td {
+#skills-table tr td {
   padding: 5px;
 }
 
