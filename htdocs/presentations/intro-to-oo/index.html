@@ -48,6 +48,29 @@ img#me05 {top: 43px;left: 36px;}
 </div>
 </div>
 
+
+<!--
+
+Subclassing - specialization
+Inheritance
+Overriding methods
+Method Resolution
+Polymorphism
+Encapsulation
+Roles
+Roles v Subclassing
+Role for Polymorphism
+Composition
+Delegation
+
+Advice
+When to Use OO - Damian's list
+Prototype OO
+Example code
+Writing code on the fly - Email?
+
+-->
+
 <div class="presentation">
 
 <div class="slide fake-slide0">
@@ -188,7 +211,9 @@ print blessed $object; # MyClass
 
   <ul>
     <li>The <strong>constructor</strong> makes a new object</li>
-    <li>In Perl, this is just another method</li>
+    <li>This is called <strong>instantiation</strong></li>
+    <li>An object is an <strong>instance</strong> of a class</li>
+    <li>In Perl, the constructor is just another method</li>
     <li>Usually called <strong>new</strong></li>
   </ul>
 </div>
@@ -214,7 +239,8 @@ use Moose;
 
   <pre><code>use File;
 
-my $file = <span class="incremental">File-&gt;new</span>( <span class="incremental">path =&gt; 'path/to/file'</span> );</code></pre>
+my $file =
+    <span class="incremental">File-&gt;new</span>( <span class="incremental">path =&gt; 'path/to/file'</span> );</code></pre>
 </div>
 
 <div class="slide">
@@ -331,7 +357,7 @@ my $object = bless {}, $class_name;</code></pre>
 </div>
 
 <div class="slide">
-  <h1>Public Versus Private Conventions</h1>
+  <h1>Public/Private Conventions</h1>
 
   <ul>
     <li>Perl does not enforce public/private distinctions</li>
@@ -416,7 +442,8 @@ has content =&gt; ( is =&gt; 'rw' );</code></pre>
 <div class="slide">
   <h1>Attribute Example</h1>
 
-  <pre><code>my $file = File-&gt;new( path =&gt; 'path/to/file' );
+  <pre><code>my $file =
+    File-&gt;new( path =&gt; 'path/to/file' );
 $file-&gt;content($new_content);</code></pre>
 </div>
 
@@ -528,12 +555,12 @@ sub write {
 </div>
 
 <div class="slide">
-  <h1>Inheritance, Roles, and Polymorphism</h1>
+  <h1>Inheritance, Roles, Polymorphism</h1>
 
   <ul>
     <li>What makes this different from imperative programming?</li>
     <li><code>write_file( $path, $content )</code></li>
-    <li>Inheritance, Roles, and Polymorphism is one way</li>
+    <li>Inheritance, Roles, and Polymorphism is one of the big differences</li>
   </ul>
 </div>
 
@@ -543,7 +570,8 @@ sub write {
   <ul>
     <li>One class can <strong>inherit</strong> from another class</li>
     <li>Also called <strong>subclassing</strong></li>
-    <li>We talk about <strong>parent</strong> and <strong>child</strong> classes</li>
+    <li>We say <strong>superclass</strong> and <strong>subclass</strong></li>
+    <li>Or <strong>parent</strong> and <strong>child</strong> classes</li>
   </ul>
 </div>
 
@@ -563,7 +591,7 @@ sub write {
   <ul>
     <li>The child class has all of the methods and attributes of its parent class(es)</li>
     <li>It can add methods or attributes</li>
-    <li>It can change an inherited attribute's properties</i>
+    <li>It can change an inherited attribute's properties</li>
     <li>It can change a method's behavior</li>
   </ul>
 </div>
@@ -577,25 +605,347 @@ sub write {
   </ul>
 </div>
 
-<!--
+<div class="slide">
+  <h1>Inheritance in Code</h1>
 
-Subclassing - specialization
-Inheritance
-Overriding methods
-Method Resolution
-Polymorphism
-Encapsulation
-Roles
-Roles v Subclassing
-Composition
-Delegation
+  <pre><code>package File::MP3;
+use Moose;
 
-Advice
-When to Use OO - Damian's list
-Example code
-Writing code on the fly - Email?
+<span class="highlight">extends 'File';</span></code></pre>
+</div>
 
--->
+<div class="slide">
+  <h1>Overriding Methods</h1>
+
+  <ul>
+    <li><strong>Overriding</strong> a method - subclass defines a method of the same name as the superclass</li>
+    <li>The subclass method can call the parent's (if it wants to)</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Overriding Example</h1>
+
+  <pre><code>package File::MP3;
+use Moose;
+extends 'File';
+
+has title =&gt; ( is =&gt; 'ro' );
+
+<span class="highlight">override write =&gt; sub {
+    my $self = shift;
+
+    # make sure content contains mp3 tags
+
+    super();
+};</span></code></pre>
+</div>
+
+<div class="slide">
+  <h1>Inheritance Continued</h1>
+
+  <ul>
+    <li>It is possible to have subclasses of subclasses</li>
+    <li>A subclass can have multiple parents - called <strong>multiple inheritance</strong></li>
+    <li>Multiple inheritance is almost always a bad idea</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Method Resolution</h1>
+
+  <ul>
+    <li>When you write <code>$object-&gt;method()</code>, how does Perl find this method?</li>
+    <li>First looks in the class for <code>$object</code></li>
+    <li>Next looks that class's parent, grandparent, and so on</li>
+    <li>This is the <strong>method resolution order</strong></li>
+    <li>Multiple inheritance is more complicated</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Polymorphism</h1>
+
+  <ul>
+    <li><strong>Polymorphism</strong> is a fancy way of saying that multiple classes share an API</li>
+    <li>Both <code>File</code> and <code>File::MP3</code> have <code>write()</code> methods</li>
+    <li>Can apply to superclass and subclass, or just any two classes</li>
+    <li>Both <code>Graph</code> and <code>Image</code> can <code>render()</code></li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Polymorphism Versus If/Then</h1>
+
+  <pre><code>if ( $file->{type} eq 'mp3' ) {
+    # save file with title tag
+} else {
+    # save file
+}
+
+# Polymorphism lets us write ...
+$file-&gt;save();</code></pre>
+</div>
+    
+
+<div class="slide">
+  <h1>Why Polymorphism Matters</h1>
+
+  <ul>
+    <li>Let's you define your APIs by <em>what they do</em></li>
+    <li>Let's you not worry about how something is implemented</li>
+    <li>For example, a <code>DisplayManager</code> can just require an object that implements a <code>render()</code> method</li>
+    <li>It does not care what is being rendered</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Encapsulation</h1>
+
+  <ul>
+    <li>Objects should document <em>what they do</em>, not <em>how they do it</em></li>
+    <li>An object's internals should be opaque to its callers</li>
+    <li>This is <strong>encapsulation</strong></li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Why Encapsulation Matters</h1>
+
+  <ul>
+    <li>Lets you change the internal implementation without breaking the API</li>
+    <li>Encourages loose coupling between components</li>
+    <li>Makes polymorphism possible</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Encapsulation How-To</h1>
+
+  <ul>
+    <li>Never treat the object like a Perl variable</li>
+    <li>This applies even inside the class</li>
+    <li>Always use accessor methods to get and set attributes</li>
+    <li>Moose makes this easy</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Overloading</h1>
+
+  <ul>
+    <li><strong>Overloading</strong> lets objects respond to native Perl operators <code>+</code>, <code>-</code>, <code>""</code> (stringification), etc.</li>
+    <li>Be careful with this!</li>
+    <li>It's easy to make insane APIs with this</li>
+    <li>But overloading booleanification, stringification, and numification can be useful</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Overloading Example</h1>
+
+  <pre><code>package File;
+use Moose;
+
+<span class="highlight">use overload q{""} =&gt; 'as_string';</span>
+
+sub as_string {
+    my $self = shift;
+
+    return 'File: ' . $self-&gt;path();
+}</code></pre>
+</div>    
+
+<div class="slide">
+  <h1>Roles</h1>
+
+  <ul>
+    <li><strong>Roles</strong> are another way to organize OO code</li>
+    <li>Roles can be used by many classes</li>
+    <li>A role is something a class <em>does</em>, not something a class <em>is</em></li>
+    <li>Roles are a mechanism for code reuse</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Roles and Classes</h1>
+
+  <ul>
+    <li>A class can <strong>consume</strong> many roles</li>
+    <li>Roles are <strong>composed</strong> into a class</li>
+    <li>Roles can consume other roles</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Roles Versus Classes</h1>
+
+  <ul>
+    <li>A role does not have a constructor</li>
+    <li>A role cannot be instantiated</li>
+    <li>A role must be consumed by a class to be used</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>What's in a Role?</h1>
+
+  <ul>
+    <li>A role can include attributes and methods</li>
+    <li>It can also require that the consuming class implement certain methods</li>
+    <li>Taken all together, this defines an interface</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Simple Role Example</h1>
+
+  <pre><code>package Comparable;
+<span class="incremental">use Moose::Role;</span>
+
+<span class="incremental">requires 'compare';</span></code></pre>
+</div>
+
+<div class="slide">
+  <h1>Another Role Example</h1>
+
+  <pre><code>package HasLogger;
+use Moose::Role;
+
+has logger =&gt; ( is =&gt; 'ro' );
+
+sub log {
+    my $self = shift;
+    $self-&gt;logger()-&gt;log(@_);
+}</code></pre>
+</div>
+
+<div class="slide">
+  <h1>Consuming Roles</h1>
+
+  <pre><code>package File;
+use Moose;
+
+<span class="highlight">with 'HasLogger';</span></code></pre>
+</div>
+
+<div class="slide">
+  <h1>Consuming Multiple Roles</h1>
+
+  <pre><code>package File;
+use Moose;
+
+<span class="highlight">with 'Comparable', 'HasLogger';</span>
+
+sub compare { ... }</code></pre>
+</div>
+
+<div class="slide">
+  <h1>Roles Versus Inheritance</h1>
+
+  <ul>
+    <li>Inheritance is for specialization</li>
+    <li>Roles are for capabilities</li>
+    <li>Roles are for code reuse</li>
+    <li>Roles let you avoid multiple inheritance</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Roles and Polymorphism</h1>
+
+  <ul>
+    <li>Polymorphism is about different classes having the same API</li>
+    <li>Roles makes this easy</li>
+    <li>Any class that consumes the <code>Comparable</code> role has a <code>compare()</code> method</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Role Introspection</h1>
+
+  <pre><code>if ( <span class="highlight">$object-&gt;does('Comparable')</span>
+     && $other-&gt;does('Comparable') ) {
+    if ( $object-&gt;compare($other) ) {
+        print "They're the same\n";
+    }
+    else {
+        print "They're not the same\n";
+    }
+}
+else {
+    print "They're not comparable\n";
+}</code></pre>
+</div>
+
+<div class="slide">
+  <h1>Composition</h1>
+
+  <ul>
+    <li>Objects can contain other objects</li>
+    <li>A <code>File</code> object may return it's last modified time as a <code>DateTime</code></li>
+    <li>This is called <strong>composition</strong></li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Composition Example</h1>
+
+  <pre><code>package File;
+use Moose;
+
+has last_mod =&gt (
+    is  =&gt; 'ro',
+    isa =&gt; 'DateTime',
+);
+
+print $file-&gt;last_mod()-&gt;ymd();</code></pre>
+</div>
+
+<div class="slide">
+  <h1>Composition</h1>
+
+  <ul>
+    <li>Composition is very common</li>
+    <li>Lots of composition can make complicated APIs</li>
+    <li>&quot;This method returns a Foo object, which contains a Bar and a Baz object&quot;</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Delegation</h1>
+
+  <ul>
+    <li><strong>Delegation</strong> is a way to hide composition</li>
+    <li>Delegating object passes method calls on to delegatee object</li>
+    <li>Moose builds this in to attribute declaration</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>Delegation Example</h1>
+
+  <pre><code>package File;
+use Moose;
+
+has last_mod =&gt (
+    is      =&gt; 'ro',
+    isa     =&gt; 'DateTime',
+    <span class="highlight">handles =&gt; { last_mod_ymd =&gt; 'ymd' },</span>
+);
+
+print $file-&gt;last_mod_ymd();</code></pre>
+</div>
+
+<div class="slide">
+  <h1>Delegation Is Good</h1>
+
+  <ul>
+    <li>It reduces the number of APIs someone needs to use</li>
+    <li>Lets you rearrange internals and preserve the public API</li>
+    <li>Fewer objects for users of your code to learn about</li>
+  </ul>
+</div>
 
 <div class="slide">
   <h1>Advice</h1>
@@ -603,7 +953,67 @@ Writing code on the fly - Email?
   <ul>
     <li>Keep public APIs small</li>
     <li>Default to read-only attributes</li>
+    <li>Avoid multiple inheritance</li>
+    <li>Avoid inheritance - use roles instead</li>
   </ul>
+</div>
+
+<div class="slide">
+  <h1>When to Use OO</h1>
+
+  <ul>
+    <li>As published in Damian Conway's <em>Perl Best Practices</em>
+    (copyright 2004, Published by O'Reilly Media, Inc.)</li>
+    <li>The system being designed is large, or is likely to become large.</li>
+    <li>The data can be aggregated into obvious structures, especially if
+      there's a large amount of data in each aggregate.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>When to Use OO</h1>
+
+  <ul>
+    <li>
+      The various types of data aggregate form a natural hierarchy that
+      facilitates the use of inheritance and polymorphism.
+      <ul>
+        <li>
+          Dave's Addendum: ... or the various types of data aggregate share
+          common behaviors that faciliate the use of roles.
+        </li>
+      </ul>
+    </li>
+    <li>You have a piece of data on which many different operations are applied.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>When to Use OO</h1>
+
+  <ul>
+    <li>You need to perform the same general operations on related types of
+      data, but with slight variations depending on the specific type of data
+      the operations are applied to.</li>
+    <li>It's likely you'll have to add new data types later.</li>
+    <li>The typical interactions between pieces of data are best represented by
+      operators.</li>
+  </ul>
+</div>
+
+<div class="slide">
+  <h1>When to Use OO</h1>
+
+  <ul>
+    <li>The implementation of individual components of the system is likely to
+      change over time.</li>
+    <li>The system design is already object-oriented.</li>
+    <li>Large numbers of other programmers will be using your code modules.</li>
+  </ul>
+</div>
+
+<div class="slide fake-slide0">
+  <h1>Live (Clothed) Coding</h1>
 </div>
 
 <div class="slide fake-slide0">
@@ -616,6 +1026,8 @@ Writing code on the fly - Email?
   <ul>
     <li><a href="http://moose.perl.org/">http://moose.perl.org/</a></li>
     <li><a href="http://search.cpan.org/dist/Moose/lib/Moose/Manual.pod">Moose::Manual</a> and <a href="http://search.cpan.org/dist/Moose/lib/Moose/Cookbook.pod">Moose::Cookbook</a></li>
+    <li>Damian Conway's <em>Object Oriented Perl</em> - Chapter 1 only</li>
+    <li>A million other web pages and books</li>
   </ul>
 </div>
 
