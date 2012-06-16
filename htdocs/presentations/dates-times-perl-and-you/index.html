@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <title>Dates, Times, Perl, and You</title>
+
+    <meta charset='utf-8'>
+    <script src='slides.js'></script>
+  </head>
+  
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+
+    article {
+        font-family: Arial;
+    }
+    
+    h3 {
+        font-size: 42px !important;
+    }
+
+    .bigger {
+        font-size: 140%;
+    }
+
+    ul ul:first-child {
+        margin-top: .5em;
+    }
+
+    .wrong {
+        color: red;
+    }
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-default'>
+      
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->
+        
+        
+      
+      <article>
+        <h1>Dates, Times, Perl, and You</h1>
+
+        <p>
+          Dave Rolsky
+          <br />
+          IRC: autarch
+          <br />
+          June 15, 2012
+          <br />
+          YAPC::NA 2012
+        </p>
+
+        <h2>(or How to Get a Date with Perl)</h2>
+      </article>
+
+      <article>
+        <h3>Dates and Times are Insane</h3>
+
+        <ul>
+          <li>Calendars</li>
+          <li>Time Zones</li>
+          <li>Daylight Saving Time</li>
+          <li>Leap Seconds!</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Do Not Write Your Own Date and Time Manipulation Code!</h3>
+
+        <ul>
+          <li>Do Not Write Your Own Date and Time Manipulation Code!</li>
+          <li><strong>Do Not Write Your Own Date and Time Manipulation Code!</strong></li>
+          <li class="bigger"><strong>Do Not Write Your Own Date and Time Manipulation Code!</strong></li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Seriously</h3>
+
+        <ul>
+          <li>Just don't</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Gregorian Calendar</h3>
+
+        <ul>
+          <li>Based only on earth's revolution around the sun</li>
+          <li>Current world standard</li>
+          <li>DateTime.pm == Gregorian</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Gregorian Calendar for Dummies</h3>
+
+        <ul>
+          <li>365 days in a regular year</li>
+          <li>366 in a leap year</li>
+          <li>Begins on January 1, year 1 (0001-01-01)</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Gregorian Calendar for Dummies</h3>
+
+        <ul>
+          <li>Year 0 == 1 BC(E)</li>
+          <li>May need to tweak the leap year algorithm around year 3000</li>
+          <li>Earth's revolution is slowing down</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Simple Dates</h3>
+
+        <pre><code>use DateTime;
+my $dt = DateTime-&gt;new(
+    year   =&gt; 2012,
+    month  =&gt; 6,
+    day    =&gt; 15,
+);
+say $dt-&gt;date();       # 2012-06-15
+say $dt-&gt;month_name(); # June
+</code></pre>
+      </article>
+
+      <article>
+        <h3>Les Dates Simples</h3>
+
+        <pre><code>use DateTime;
+my $dt = DateTime-&gt;new(
+    year   =&gt; 2012,
+    month  =&gt; 6,
+    day    =&gt; 15,
+    locale =&gt; 'fr',
+);
+say $dt-&gt;date();       # 2012-06-15
+say $dt-&gt;month_name(); # Juin
+</code></pre>
+      </article>
+
+      <article>
+        <h3>Other Calendars</h3>
+        <pre><code>use DateTime;
+use DateTime::Calendar::Chinese;
+my $dt = DateTime-&gt;new(
+    year   =&gt; 2012,
+    month  =&gt; 6,
+    day    =&gt; 15,
+);
+my $chdt = DateTime::Calendar::Chinese-&gt;from_object( object =&gt; $dt );
+say $chdt-&gt;cycle();         # 78
+say $chdt-&gt;zodiac_animal(); # dragon
+say $chdt-&gt;celestial_stem(), $chdt-&gt;terrestrial_branch(); # 壬辰
+</code></pre>
+      </article>
+
+      <article>
+        <h3>Time for Dummies</h3>
+
+        <ul>
+          <li>Day length == 1 rotation of the Earth around its axis</li>
+          <li>1 day == 24 hours</li>
+          <li>First hour is hour 0</li>
+          <li>Last hour is hour 23</li>
+          <li>1 hour == 60 minutes</li>
+          <li>1 minute == 60 seconds (almost all of the time)</li>
+          <li>1 day == 86,400 seconds (more or less)</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Atomic Clocks</h3>
+
+        <ul>
+          <li>Ties length of second to physicsy stuff</li>
+          <li>Length of second never changes</li>
+          <li>TAI is the international atomic time standard</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Leap Seconds</h3>
+
+        <ul>
+          <li>AKA "The Devil", "A Really, Really Bad Idea"</li>
+          <li>The earth's rotation is slowing down</li>
+          <li>The length of a second is not</li>
+          <li>We need to resync midnight</li>
+          <li>Bam, leap second announced!</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>UTC</h3>
+
+        <ul>
+          <li>Coordinated Universal Time</li>
+          <li>Temps Universel Coordineé</li>
+          <li>UTC = TAI (atomic time) + leap seconds to date (34)</li>
+          <li>Current world standard</li>
+          <li>Based on time in Greenwich, England</li>
+          <li>Time zones are based on an offset from UTC</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Time Zone Warning</h3>
+
+        <ul>
+          <li>Time zones are political</li>
+          <li>Change all the time for dumb reasons</li>
+          <li>Last US change was pointless</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Time Zone Standards</h3>
+
+        <ul>
+          <li>Olson time zone database is the standard</li>
+          <li><a href="http://www.iana.org/time-zones">http://www.iana.org/time-zones</a></li>
+          <li>An open source data/software project</li>
+          <li>Microsoft does their own thing (of course)</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Time Zone 101</h3>
+
+        <ul>
+          <li>An offset in minutes and hours from UTC</li>
+          <li>Madison is currently at -05:00</li>
+          <li>Also has a name</li>
+          <li>Names are (mostly) continent or ocean + major city
+            <ul>
+              <li>America/Chicago</li>
+              <li>Asia/Taipei</li>
+              <li>Pacific/Fiji</li>
+              <li>America/Argentina/San_Juan</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Time Zone 102</h3>
+
+        <ul>
+          <li>A named zone is a collection of rules</li>
+          <li>Rules define historical and future DST changes</li>
+          <li>Also define short names like CDT</li>
+          <li>Short names are not unique!</li>
+          <li>Only use short names for display</li>
+        </ul>
+      </article>
+          
+      <article>
+        <h3>Picking Time Zones</h3>
+
+        <ul>
+          <li>The Olson database inclues many historical zones</li>
+          <li>America/Chicago == America/Menominee</li>
+          <li>Menominee moved from Eastern to Central in 1973</li>
+          <li>No API for finding current time zones (yet?)</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>What Time is it There?</h3>
+
+        <pre><code>use DateTime;
+my $dt = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 6,
+    day       =&gt; 15,
+    hour      =&gt; 13,
+    minute    =&gt; 30,
+    time_zone =&gt; 'America/Chicago',
+);
+
+say $dt-&gt;datetime(); # 2012-06-15T13:30:00
+$dt-&gt;set_time_zone('Asia/Taipei');
+say $dt-&gt;datetime(); # 2012-06-16T02:30:00
+</code></pre>
+      </article>
+
+      <article>
+        <h3>The Floating Time Zone</h3>
+        <pre><code>use DateTime;
+my $dt = DateTime-&gt;now(
+    time_zone =&gt; 'floating',
+);
+</code></pre>
+
+        <ul>
+          <li>No time zone at all</li>
+          <li>No offset conversion when set to a real zone</li>
+          <li>No leap seconds</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>The Floating Time Zone</h3>
+
+        <pre><code>use DateTime;
+my $dt = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 6,
+    day       =&gt; 15,
+    time_zone =&gt; 'floating',
+);
+
+say $dt-&gt;datetime(); # 2012-06-15T13:30:00
+$dt-&gt;set_time_zone('Asia/Taipei');
+say $dt-&gt;datetime(); # 2012-06-15T13:30:00
+</code></pre>
+      </article>
+
+      <article>
+        <h3>Epochs and the Unix Epoch</h3>
+
+        <ul>
+          <li>An epoch is a reference point for a calendar's start date & time</li>
+          <li>The Unix epoch == 1970-01-01T00:00:00 UTC</li>
+          <li>Unix epoch is counted in seconds</li>
+          <li>Not really UTC since POSIX says we skip leap seconds</li>
+          <li>But not really TAI cause NTP is UTC-based</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Calculating the Epoch</h3>
+
+        <pre><code>use DateTime;
+my $dt = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 6,
+    day       =&gt; 15,
+    hour      =&gt; 13,
+    minute    =&gt; 30,
+    time_zone =&gt; 'America/Chicago',
+);
+
+say $dt-&gt;epoch(); # 1339792200
+</code></pre>
+      </article>
+
+      <article>
+        <h3>The y2.038k problem</h3>
+
+        <ul>
+          <li>The epoch will no longer fit in a 32-bit int</li>
+          <li>2038-01-19T03:14:07 UTC</li>
+          <li>A 30-year mortgage in 2012 ends in 2042</li>
+          <li>As of Perl 5.12, Perl always uses a 64-bit epoch</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>DateTime::* Ecosystem</h3>
+
+        <ul>
+          <li>Formatter/parsers</li>
+          <li>Other calendars</li>
+          <li>Event and recurrence modules</li>
+          <li>DateTimeX modules</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>Recommendations and Gotchas</h2>
+      </article>
+
+      <article>
+        <h3>There's no DateTime::Date Class</h3>
+
+        <ul>
+          <li>If I could do it all over again ...</li>
+          <li>Use the floating time zone</li>
+          <li>Use the <code>delta_md()</code> and <code>delta_days</code> methods for math</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Calculating the Difference Between Two Dates</h3>
+
+        <pre><code>my $dt1 = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 6,
+    day       =&gt; 15,
+    time_zone =&gt; 'floating',
+);
+
+my $dt2 = DateTime-&gt;new(
+    year      =&gt; 1973,
+    month     =&gt; 12,
+    day       =&gt; 6,
+    time_zone =&gt; 'floating',
+);
+
+my $duration = $dt1-&gt;delta_days($dt2);
+say $duration-&gt;in_units('days'); # 14071
+</code></pre>
+      </article>
+
+      <article>
+        <h3>DateTime::Duration Has a Terrible API</h3>
+
+        <ul>
+          <li>What moron created this?</li>
+          <li>Internally it stores months, days, minutes, seconds, and nanoseconds</li>
+          <li>Externally has <code>years()</code>, <code>months()</code>, <code>weeks()</code>, <code>days()</code>, etc. methods</li>
+          <li>When you call <code>$duration-&gt;days()</code> you days but not weeks</li>
+          <li>Use <code>$duration-&gt;in_units('days')</code> instead</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Say What, DateTime::Duration?</h3>
+
+        <pre><code>my $dt1 = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 6,
+    day       =&gt; 15,
+    time_zone =&gt; 'floating',
+);
+
+my $dt2 = DateTime-&gt;new(
+    year      =&gt; 1973,
+    month     =&gt; 12,
+    day       =&gt; 6,
+    time_zone =&gt; 'floating',
+);
+
+my $duration = $dt1-&gt;delta_days($dt2);
+say $duration-&gt;days();           # 1 ... WTF?
+say $duration-&gt;weeks()           # 2010
+say $duration-&gt;in_units('days'); # 14071
+</code></pre>
+      </article>
+
+      <article>
+        <h2>DateTime Math is Hard<br/>Let's Go Shopping</h2>
+      </article>
+
+      <article>
+        <h3>How Long is a Month?</h3>
+
+        <pre><code>my $dt = ...; # 2009-02-01
+$dt-&gt;add( days =&gt; 28 );
+say $dt; # 2009-03-01
+$dt-&gt;add( days =&gt; 28 );
+say $dt; # 2009-03-29
+</code></pre>
+      </article>
+
+      <article>
+        <h3>How Long is a Month??</h3>
+
+        <pre><code>my $dt = ...; # 2009-01-30
+$dt-&gt;add( months =&gt; 1 );
+say $dt; # 2009-03-02
+$dt-&gt;add( months =&gt; 1 );
+say $dt; # 2009-04-02
+</code></pre>
+      </article>
+
+      <article>
+        <h3>How Long is a Month??!</h3>
+
+        <pre><code>my $dt = ...; # 2009-01-30
+$dt-&gt;add( months =&gt; 1, end_of_month =&gt; 'limit' );
+say $dt; # 2009-02-28
+$dt-&gt;add( months =&gt; 1 );
+say $dt; # 2009-03-28
+</code></pre>
+      </article>
+
+      <article>
+        <h3>How Long is a Day?</h3>
+
+        <pre><code>my $dt = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 11,
+    day       =&gt; 4,
+    hour      =&gt; 0,
+    time_zone =&gt; 'America/Chicago',
+);
+
+say $dt; # 2012-11-04T00:00:00
+$dt-&gt;add( hours =&gt; 1 );
+say $dt; # 2012-11-04T01:00:00
+$dt-&gt;add( hours =&gt; 1 );
+say $dt; # 2012-11-04T01:00:00
+</code></pre>
+      </article>
+
+      <article>
+        <h3>How Long is a Day?</h3>
+
+        <pre><code>my $dt = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 3,
+    day       =&gt; 11,
+    hour      =&gt; 0,
+    time_zone =&gt; 'America/Chicago',
+);
+
+say $dt; # 2012-03-11T00:00:00
+$dt-&gt;add( hours =&gt; 1 );
+say $dt; # 2012-03-11T01:00:00
+$dt-&gt;add( hours =&gt; 1 );
+say $dt; # 2012-03-11T03:00:00
+</code></pre>
+      </article>
+
+      <article>
+        <h3>No 02:00 for You!</h3>
+
+        <pre><code>my $dt = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 3,
+    day       =&gt; 10,
+    hour      =&gt; 2,
+    time_zone =&gt; 'America/Chicago',
+);
+
+say $dt; # 2012-03-11T00:00:00
+$dt-&gt;add( days =&gt; 1 ); # Throws an exception ...
+# Invalid local time for date in time zone: America/Chicago
+</code></pre>
+      </article>
+
+      <article>
+        <h3>Math Order Matters</h3>
+
+        <pre><code>my $dt = DateTime-&gt;new(
+    year      =&gt; 2011,
+    month     =&gt; 2,
+    day       =&gt; 28,
+);
+
+$dt-&gt;add( months =&gt; 1, days =&gt; 1 );
+say $dt; # 2011-04-01, not 2011-03-29
+</code></pre>
+      </article>
+
+      <article>
+        <h3>More math gotchas</h3>
+
+        <ul>
+          <li>Math is not always reversible
+            <ul>
+              <li>$dt1 - $dt2 = $dur</li>
+              <li>$dt2 + $dur != $dt1</li>
+            </ul>
+          </li>
+          <li>Math across DST changes is confusing
+            <ul>
+              <li>$dst_date - $non_dst_date = ?</li>
+              <li>Does the duration include the DST change's hour?</li>
+            </ul>
+          </li>
+          <li>Leap years</li>
+          <li>Leap seconds</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>How to Do Math Safely</h3>
+
+        <ul>
+          <li>Always use <code>add()</code>, <code>delta_days()</code>, <code>subtract()</code>, etc.</li>
+          <li>Never write something like this:<br/>
+            <code class="wrong">$dt-&gt;set( day =&gt; $dt-&gt;day() + 1 )</code></li>
+          <li>Use the floating time zone if you can</li>
+          <li>Use UTC if you can - UTC has no DST changes</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Ambiguous Local Times</h3>
+
+        <pre><code>my $dt = DateTime-&gt;new(
+    year      =&gt; 2003,
+    month     =&gt; 10,
+    day       =&gt; 26,
+    hour      =&gt; 1,
+    minute    =&gt; 30,
+    second    =&gt; 0,
+    time_zone =&gt; 'America/Chicago',
+);
+</code></pre>
+
+        <ul>
+          <li>Is this standard or DST time?</li>
+          <li>There is a DST change on 2003-10-26 from 01:59:59 (DST) to 01:00:00 (standard)</li>
+          <li>DateTime.pm always picks the latest UTC time</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Storage and Presentation</h3>
+
+        <ul>
+          <li>Store datetimes as floating or UTC whenever possible</li>
+          <li>Or store them as a datetime + time zone (Pg's <code>TIMESTAMP WITH TZ</code> type)</li>
+          <li>Don't store an epoch, store a datetime</li>
+          <li>Use time zones for presentation to users</li>
+          <li><bold>Never</bold> just store datetimes in the machine's current local time zone</li>
+          <li>What happens when you move?</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>(Stupid?) Performance tricks</h2>
+      </article>
+
+      <article>
+        <h3>My Rules of Optimization</h3>
+
+        <ol>
+          <li>Don't optimize</li>
+          <li>Don't optimize, I'm serious</li>
+          <li>Don't optimize without benchmarking first</li>
+          <li>Don't benchmark without profiling first</li>
+          <li>See rule #1</li>
+        </ol>
+      </article>
+
+      <article>
+        <h3>Cache the time zone object</h3>
+
+        <pre><code>my $dt = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 6,
+    day       =&gt; 15,
+    hour      =&gt; 13,
+    minute    =&gt; 30,
+    time_zone =&gt; 'America/Chicago',
+);
+</code></pre>
+
+        <pre><code>my $tz = DateTime::TimeZone-&gt;new( name =&gt; 'America/Chicago' );
+my $dt = DateTime-&gt;new(
+    year      =&gt; 2012,
+    month     =&gt; 6,
+    day       =&gt; 15,
+    hour      =&gt; 13,
+    minute    =&gt; 30,
+    time_zone =&gt; $tz,
+);
+</code></pre>
+      </article>
+
+      <article>
+        <h3>Don't Use a Parser</h3>
+
+        <ul>
+          <li>If your data only comes in one flavor</li>
+        </ul>
+
+        <pre><code>my $dt = DateTime::Format::Foo-&gt;parse_datetime($string);</code></pre>
+
+        <pre><code>my ( $y, $m, $d ) = $string =~ /^(\d{4})-(\d{2})-(\d{2})/;
+
+my $dt = DateTime-&gt;new(
+    year  =&gt $y,
+    month =&gt $m,
+    day   =&gt $d,
+);
+</code></pre>
+      </article>
+
+      <article>
+        <h3>Don't Validate</h3>
+
+        <ul>
+          <li>If your data is always valid</li>
+        </ul>
+
+        <pre><code>local $Params::Validate::NO_VALIDATION = 1;
+my $dt = DateTime-&gt;new(
+    year  =&gt $y,
+    month =&gt $m,
+    day   =&gt $d,
+);
+</code></pre>
+      </article>
+
+      <article>
+        <h2>Questions?</h2>
+      </article>
+
+      <article>
+        <h2>Thank You</h2>
+      </article>
+
+    </section>
+
+  </body>
+</html>
