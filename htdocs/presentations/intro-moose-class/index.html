@@ -71,7 +71,7 @@ img#me05 {top: 43px;left: 36px;}
   <ul>
     <li><strong>Declarative</strong> OO sugar</li>
     <li>Introspectable</li>
-    <li>Extensible (188 MooseX::* on CPAN)</li>
+    <li>Extensible (202 MooseX::* on CPAN)</li>
     <li>Community approved (1200+ downstream dependents on CPAN)</li>
   </ul>
 </div>
@@ -1155,8 +1155,8 @@ Person-&gt;can('extends');</code></pre>
   <h1>Cleaning Up Moose Droppings</h1>
 
   <pre><code>package Person;
-<span class="highlight">use namespace::autoclean;</span>
 use Moose;
+<span class="highlight">use namespace::autoclean;</span>
 
 ...
 
@@ -1484,34 +1484,6 @@ sub compare { ... }
 
 Integer-&gt;does('TestsEquality'); # true
 Integer-&gt;does('Comparable'); # also true!</code></pre>
-</div>
-
-<div class="slide">
-  <h1>Name Conflicts Between Roles</h1>
-
-  <pre><code>package HasSubProcess;
-use Moose::Role;
-
-<span class="highlight">sub execute { ... }</span>
-
-package Killer;
-use Moose::Role;
-
-with 'HasSubProcess';
-
-<span class="highlight">sub execute { ... }</span></code></pre>
-</div>
-
-<div class="slide">
-  <h1>Delayed Conflict</h1>
-
-  <pre><code>package SysadminAssassin;
-with 'Killer';</code></pre>
-
-  <ul>
-    <li><code>SysadminAssassin</code> must implement its own <code>execute</code></li>
-    <li>But loading the <code>Killer</code> role by itself does not cause an error</li>
-  </ul>
 </div>
 
 <div class="slide">
@@ -2422,9 +2394,9 @@ around run</span> =&gt; sub {
         <li>alter parameters passed to the original method</li>
         <li>alter the return value of the original method</li>
         <li>not call the original method at all (or call a <em>different</em> method)</li>
-        <li>When using modifiers in a role, require the modified method</li>
       </ul>
     </li>
+    <li>When using modifiers in a role, require the modified method</li>
   </ul>
 </div>
 
@@ -2852,7 +2824,7 @@ sub work {
   <h1>Digression: The Type Registry</h1>
 
   <ul>
-    <li>Types are actually <code>Moose::Meta::TypeConstraints</code> <em>objects</em></li>
+    <li>Types are actually <code>Moose::Meta::TypeConstraint</code> <em>objects</em></li>
     <li>Stored in an interpreter-global registry mapping names to objects</li>
   </ul>
 </div>
@@ -3705,7 +3677,7 @@ with HasCollection =&gt; { type =&gt; 'Int' };</code></pre>
     <li>mailing list - <a href="mailto:moose@perl.org">moose@perl.org</a></li>
     <li>Slides and exercises are in Moose's git repo:
         <br />
-        <span style="font-size:80%; white-space: nowrap">git://jules.scsys.co.uk/gitmo/moose-presentations</span></li>
+        <span style="font-size:80%; white-space: nowrap">git://git.moose.perl.org/moose-presentations.git</span></li>
   </ul>
 </div>
 
