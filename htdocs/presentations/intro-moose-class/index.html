@@ -950,10 +950,10 @@ sub BUILD {
 <div class="slide">
   <h1>Object Construction a la Moose</h1>
 
-  <pre><code>Person-&gt;new(@_)</code></pre>
+  <pre><code>Person-&gt;new(@args)</code></pre>
 
   <ol style="margin-top: 0">
-    <li>Calls <code>Person-&gt;BUILDARGS(@_)</code> to turn <code>@_</code> into a hashref</li>
+    <li>Calls <code>Person-&gt;BUILDARGS(@args)</code> to turn <code>@args</code> into a hashref</li>
     <li>Blesses a reference</li>
     <li>Populates attributes based on the hashref from #1</li>
     <li>Calls <code>$new_object-&gt;BUILDALL($constructor_args)</code>
@@ -1032,7 +1032,7 @@ extends 'LWP';</code></pre>
         <li>No <code>DEMOLISH()</code></li>
       </ul>
     </li>
-    <li>But see <code>MooseX::NonMoose</code> for a workaround</li>
+    <li>But <code>MooseX::NonMoose</code> fixes all of this</li>
   </ul>
 </div>  
 
@@ -1233,8 +1233,6 @@ use Moose;
   <pre># cd exercises
 
 # perl bin/prove -lv t/00-prereq.t
-
-# perl install-moose (if needed)
 
 ## Read the instructions in t/01-classes.t
 
@@ -2003,6 +2001,26 @@ Person-&gt;new( <span class="wrong">shoes =&gt; Shoes-&gt;new</span> );</code></
 </div>
 
 <div class="slide">
+  <h1>Some More <code>init_arg</code> examples</h1>
+
+  <ul>
+    <li>Private attribute, public constructor name</li>
+  </ul>
+
+<pre><code>package Person;
+use Moose;
+
+has <span class="highlight">_size</span> =&gt; (
+    is       =&gt; 'ro',
+    <span class="highlight">init_arg =&gt; 'size',</span>
+);
+
+my $person = Person-&gt;new( <span class="highlight">size =&gt; 42</span> );
+
+<span class="wrong">$person->size(); # error</span></code></pre>
+</div>
+
+<div class="slide">
   <h1>Why Set <code>init_arg =&gt; undef</code>?</h1>
 
   <ul>
@@ -2017,7 +2035,7 @@ Person-&gt;new( <span class="wrong">shoes =&gt; Shoes-&gt;new</span> );</code></
   <h1>Attribute Inheritance</h1>
 
   <ul>
-    <li>By default, subclasses inherit attribute as-is</li>
+    <li>By default, subclasses inherit attributes as-is</li>
     <li>Can change attribute parameters in subclasses</li>
   </ul>
 </div>   
@@ -2602,11 +2620,15 @@ has start_date =&gt; (
   <h1>Subtype Shortcuts - <code>class_type</code></h1>
 
   <pre><code>use Moose::Util::TypeConstraints;
-class_type 'DateTime';</code></pre>
+
+class_type 'DateTime';
+
+</code></pre>
 
 <hr />
 
-<pre><code>subtype     'DateTime',
+<pre><code>
+subtype     'DateTime',
     as      'Object',
     where   { $_-&gt;isa('DateTime') },
     message { ... };</code></pre>
@@ -2616,11 +2638,15 @@ class_type 'DateTime';</code></pre>
   <h1>Subtype Shortcuts - <code>role_type</code></h1>
 
   <pre><code>use Moose::Util::TypeConstraints;
-role_type 'Printable';</code></pre>
+
+role_type 'Printable';
+
+</code></pre>
 
 <hr />
 
-<pre><code>subtype 'Printable',
+<pre><code>
+subtype 'Printable',
     as  'Object',
     where
         { Moose::Util::does_role(
@@ -2632,11 +2658,15 @@ role_type 'Printable';</code></pre>
   <h1>Subtype Shortcuts - <code>duck_type</code></h1>
 
   <pre><code>use Moose::Util::TypeConstraints;
-duck_type Car =&gt; qw( run break_down );</code></pre>
+
+duck_type Car =&gt; qw( run break_down );
+
+</code></pre>
 
 <hr />
 
-<pre><code>subtype 'Car',
+<pre><code>
+subtype 'Car',
     as      'Object',
     where   { all { $_-&gt;can($_) }
               qw( run break_down ) },
@@ -2647,11 +2677,15 @@ duck_type Car =&gt; qw( run break_down );</code></pre>
   <h1>Subtype Shortcuts - <code>enum</code></h1>
 
   <pre><code>use Moose::Util::TypeConstraints;
-enum Color =&gt; qw( red blue green );</code></pre>
+
+enum Color =&gt; qw( red blue green );
+
+</code></pre>
 
 <hr />
 
-<pre><code>my %ok = map { $_ =&gt; 1 }
+<pre><code>
+my %ok = map { $_ =&gt; 1 }
              qw( red blue green );
 
 subtype     'Color'
@@ -2666,7 +2700,9 @@ subtype     'Color'
   <pre><code>package Person;
 
 <span class="highlight">my $posint =
-    subtype as 'Int', where { $_ &gt; 0 };</span>
+    subtype
+        as 'Int',
+        where { $_ &gt; 0 };</span>
 
 has size =&gt; (
     is  =&gt; 'ro',
@@ -2946,10 +2982,21 @@ has transaction_history =&gt; (
 </div>
 
 <div class="slide">
+  <h1>Specio</h1>
+
+  <ul>
+    <li>My attempt to replace <code>MooseX::Types</code> <strong>and</strong> built-in types</li>
+    <li>Third-system effect?</li>
+    <li>Still alpha - needs some work</li>
+  </ul>
+</div>
+
+<div class="slide">
   <h1>Recommendation</h1>
 
   <ul>
-    <li>Use <code>MooseX::Types</code></li>
+    <li>Use <code>MooseX::Types</code> for now</li>
+    <li>Switch to <code>Specio</code> when it's ready?</li>
     <li>Compile time error catching and automatic namespacing are huge wins</li>
     <li>Docs from <code>Moose::Util::TypeConstraints</code> are 98% compatible with <code>MooseX::Types</code> anyway</li>
     <li>A function exported by a type library works wherever a type name would</li>
@@ -3111,6 +3158,25 @@ has lungs =&gt; (
 </div>
 
 <div class="slide">
+  <h1>Delegation Explained</h1>
+
+<pre><code>package Person;
+
+has lungs =&gt; (
+    is      =&gt; 'ro',
+    isa     =&gt; 'Lungs',
+    <span class="delete">handles =&gt; [ 'inhale', 'exhale' ],</span>
+);
+
+<span class="highlight">sub inhale {
+    my $self = shift;
+    $self-&gt;lungs()-&gt;inhale();
+}
+
+sub exhale { ... }</span></pre></code>
+</div>
+
+<div class="slide">
   <h1>Why Delegation?</h1>
 
   <ul>
@@ -3174,8 +3240,12 @@ has account =&gt; (
     },</code></pre>
 
   <ul>
-    <li><code>$person-&gt;receive_money</code> = <code>$person-&gt;account-&gt;deposit</code></li>
-    <li><code>$person-&gt;give_money</code> = <code>$person-&gt;account-&gt;withdraw</code></li>
+    <li><code>$person-&gt;receive_money</code>
+      <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;= <code>$person-&gt;account-&gt;deposit</code></li>
+    <li><code>$person-&gt;give_money</code>
+      <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;= <code>$person-&gt;account-&gt;withdraw</code></li>
   </ul>
 </div>
 
@@ -3263,7 +3333,7 @@ has history =&gt; (
   <pre><code>package Person;
 use Moose;
 has _favorite_numbers =&gt; (
-    traits   =&gt; [ 'Array' ],
+    <span class="highlight">traits   =&gt; [ 'Array' ],</span>
     isa      =&gt; 'ArrayRef[Int]',
     default  =&gt; sub { [] },
     init_arg =&gt; undef,
@@ -3342,82 +3412,6 @@ $person-&gt;account-&gt;deposit(100);</code></pre>
 </div>
 
 <div class="slide">
-  <h1>Traits and Metaclasses</h1>
-
-  <ul>
-    <li>The ultimate in customization</li>
-    <li>Per attribute metaclasses</li>
-    <li>Per attribute roles applied to the attribute metaclass</li>
-    <li>Change the meta-level behavior</li>
-  </ul>
-</div>
-
-<div class="slide">
-  <h1>Traits and Metaclasses</h1>
-
-  <ul>
-    <li>The default metaclass is <code>Moose::Meta::Attribute</code></li>
-    <li>Controls accessor generation, defaults, delegation, etc.</li>
-    <li>Adding a role to this metaclass (or replacing it) allows for infinite customization</li>
-  </ul>
-</div>
-
-<div class="slide">
-  <h1>Traits and Metaclasses</h1>
-
-  <ul>
-    <li>Can add/alter/remove an attribute parameter (from <code>has</code>)</li>
-    <li>Can change behavior of created attribute</li>
-  </ul>
-</div>
-
-<div class="slide">
-  <h1>Simple Trait Example</h1>
-
-  <pre><code>package Person;
-use Moose;
-use MooseX::LabeledAttributes;
-
-has ssn =&gt; (
-    <span class="highlight">traits =&gt; [ 'Labeled' ],</span>
-    is     =&gt; 'ro',
-    isa    =&gt; 'Str',
-    <span class="highlight">label  =&gt; 'Social Security Number',</span>
-);
-print <span class="highlight">Person-&gt;meta
-            -&gt;get_attribute('ssn')-&gt;label;</span></code></pre>
-</div>
-
-<div class="slide">
-  <h1>Simple Metaclass Example</h1>
-
-  <pre><code>package Person;
-use Moose;
-use MooseX::LabeledAttributes;
-
-has ssn =&gt; (
-    <span class="highlight">metaclass =&gt;
-        'MooseX::Meta::Attribute::Labeled',</span>
-    is        =&gt; 'ro',
-    isa       =&gt; 'Str',
-    <span class="highlight">label     =&gt; 'Social Security Number',</span>
-);
-print <span class="highlight">Person-&gt;meta
-            -&gt;get_attribute('ssn')-&gt;label;</span></code></pre>
-</div>
-
-<div class="slide">
-  <h1>Traits vs Metaclass</h1>
-
-  <ul>
-    <li>Can apply any mix of traits to an attribute</li>
-    <li>But just one metaclass</li>
-    <li>Traits (aka roles) can cooperate</li>
-    <li>Metaclasses require you to pick just one</li>
-  </ul>
-</div>
-
-<div class="slide">
   <h1>Advanced Attributes Summary</h1>
 
   <ul>
@@ -3425,7 +3419,6 @@ print <span class="highlight">Person-&gt;meta
     <li>Use trigger to do an action post-attribute write</li>
     <li>Use delegations to hide "internal" objects</li>
     <li>Use native delegations to treat Perl types as objects</li>
-    <li>Traits and metaclasses let you extend Moose's core attribute features</li>
   </ul>
 </div>
 
@@ -3658,12 +3651,13 @@ with HasCollection =&gt; { type =&gt; 'Int' };</code></pre>
   </p>
 
   <ul>
-    <li><a href="http://search.cpan.org/dist/Catalyst-Runtime">Catalyst</a></li>
-    <li><a href="http://search.cpan.org/dist/CHI">CHI</a></li>
-    <li><a href="http://search.cpan.org/dist/Devel-REPL">Devel::REPL</a></li>
-    <li><a href="http://search.cpan.org/dist/Email-Sender">Email::Sender</a></li>
-    <li><a href="http://search.cpan.org/dist/Fey">Fey</a></li>
-    <li><a href="http://search.cpan.org/dist/Net-Twitter">Net::Twitter</a></li>
+    <li><a href="http://metacpan.org/release/Catalyst-Runtime">Catalyst</a></li>
+    <li><a href="http://metacpan.org/release/CHI">CHI</a></li>
+    <li><a href="http://metacpan.org/release/Devel-REPL">Devel::REPL</a></li>
+    <li><a href="http://metacpan.org/release/Dist-Zilla">Dist::Zilla</a></li>
+    <li><a href="http://metacpan.org/release/Email-Sender">Email::Sender</a></li>
+    <li><a href="http://metacpan.org/release/Fey">Fey</a></li>
+    <li><a href="http://metacpan.org/release/Net-Twitter">Net::Twitter</a></li>
   </ul>
 </div>
 
@@ -3672,7 +3666,7 @@ with HasCollection =&gt; { type =&gt; 'Int' };</code></pre>
 
   <ul>
     <li><a href="http://moose.perl.org/">http://moose.perl.org/</a></li>
-    <li><a href="http://search.cpan.org/dist/Moose/lib/Moose/Manual.pod">Moose::Manual</a> and <a href="http://search.cpan.org/dist/Moose/lib/Moose/Cookbook.pod">Moose::Cookbook</a></li>
+    <li><a href="https://metacpan.org/module/Moose::Manual">Moose::Manual</a> and <a href="https://metacpan.org/module/Moose::Cookbook">Moose::Cookbook</a></li>
     <li><a href="irc://irc.perl.org/#moose">irc://irc.perl.org/#moose</a></li>
     <li>mailing list - <a href="mailto:moose@perl.org">moose@perl.org</a></li>
     <li>Slides and exercises are in Moose's git repo:
@@ -3691,7 +3685,7 @@ with HasCollection =&gt; { type =&gt; 'Int' };</code></pre>
 
 <!--
 
-Copyright 2009 David Rolsky. All Rights Reserved.
+Copyright 2009-2013 David Rolsky. All Rights Reserved.
 
 This work is licensed under a Creative Commons Attribution-Share Alike
 3.0 United States License See
