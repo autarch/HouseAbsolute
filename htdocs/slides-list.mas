@@ -2,17 +2,17 @@
 
 <ul>
   <li><a href="/presentations/perl-unicode-basics/">Basics of Unicode in Perl</a> - I made this to present to my co-workers at MaxMind. It's never been given at a conference.</li>
-  <li><a href="/presentations/intro-moose-class/index.html">Intro to Moose class</a></li>
-  <li><a href="/presentations/intro-to-oo/index.html">Intro to Object-Oriented Programming in Perl</a></li>
-  <li><a href="/presentations/a-date-with-perl/index.html">A Date with Perl</a> - I've also called this Dates, Times, Perl, and You in the past</li>
-  <li><a href="/presentations/markdent/index.html">Markdent: Event-Driven Markdown Parsing</a></li>
+  <li><a href="/presentations/intro-moose-class/">Intro to Moose class</a></li>
+  <li><a href="/presentations/intro-to-oo/">Intro to Object-Oriented Programming in Perl</a></li>
+  <li><a href="/presentations/a-date-with-perl/">A Date with Perl</a> - I've also called this Dates, Times, Perl, and You in the past</li>
+  <li><a href="/presentations/markdent/">Markdent: Event-Driven Markdown Parsing</a></li>
   <li><a href="/presentations/patterns-in-perl/start.html">Patterns in Perl</a></li>
 </ul>
 
 <p>Ancient cruft, view at your own risk. There may be something worthwhile in here, but much of the content is outdated.</p>
 
 <ul>
-  <li><a href="/presentations/fey-yaform/index.html">Fey, Another Freakin' ORM</a></li>
+  <li><a href="/presentations/fey-yaform/">Fey, Another Freakin' ORM</a></li>
   <li><a href="/presentations/perl-datetime-project/start.html">Perl DateTime Project</a> - A much older presentation on the same topic as A Date with Perl</li>
   <li><a href="/presentations/intro-to-mason/start.html">Introduction to Mason</a></li>
   <li><a href="/presentations/jsan-ajax-perl/start.html">JSAN, Ajax, and Perl</a> (<a href="/presentations/jsan-ajax-perl-ja/start.html">Japanese translation</a>)</li>
